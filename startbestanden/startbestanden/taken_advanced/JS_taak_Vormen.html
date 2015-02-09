@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JS advanced taak: Vormen</title>
+<style media="screen" type="text/css">
+<!--
+body {
+	font-family:Arial, Helvetica, sans-serif;
+}
+em {
+	font-style:normal;
+	font-weight:bold;
+	color:#906;
+}
+img {
+	float:left
+}
+h3 {
+	clear:both;
+}
+
+#output {
+	background-color:#CFC;
+	padding:1em;
+}
+-->
+</style>
+</head>
+
+<body>
+<h1>JS advanced taak: Vormen</h1>
+<p>Een taak over objecten en inheritance</p>
+<h3>Geteste topics</h3>
+<ul>
+  <li>objecten</li>
+  <li>inheritance</li>
+</ul>
+<h3>Opdracht: </h3>
+<ul>
+  <li> maak de volgende constructors: <em>Vorm, Cirkel, Veelhoek, Vierhoek, Driehoek,Vierkant</em>
+    <ul>
+      <li>een <em>Vorm</em> heeft minstens
+        <ul>
+          <li>de  properties: <em>naam</em>: <code>String</code>(zoals &quot;bolletje&quot;); <em>type</em>:<code>String </code>(zegt welk soort vorm iets is, zoals "vierkant"); <em>tekst</em>: <code>String</code>;</li>
+          <li> de  methods: <em> spreek()</em>, die de <em>tekst</em> in in de<code> div#output</code> toont en <em>schrijf()</em>: die alle properties als JSON object toont in de console</li>
+        </ul>
+      </li>
+      <li>een <em>Cirkel</em> en een <em>Veelhoek</em>  afgeleid van <em>Vorm</em>, een <em>Driehoek</em> en een <em>Vierhoek</em> zijn afgeleid van <em>Veelhoek</em>, een <em>Vierkant</em> is afgeleid van <em>Vierhoek</em></li>
+      <li> een <em>Cirkel</em> heeft de property <em>straal</em>: <code>number</code></li>
+      <li>een <em>Veelhoek</em> heeft de property <em>aantalHoeken</em>: <code>number</code> met het aantal hoeken</li>
+      <li>een <em>Vierhoek</em> heeft een <em>lengte</em>: <code>number</code> en een <em>breedte</em>: <code>number</code></li>
+      <li>een <em>Vierkant</em> heeft enkel een <em>zijde</em>: <code>number</code></li>
+      <li>een <em>Driehoek</em> heeft  een <em>zijden</em>: <code>array</code> property met een array van<em> zijde(n)</em>: <code>number</code> </li>
+      <li>Alle <em>Cirkels</em>, <em>Vierhoeken</em> en <em>Driehoeken</em> hebben de methods <em>getOppervlakte()</em>: <code>number</code>; <em>getOmtrek()</em>: <code>number</code>
+        <ul>
+          <li>we rekenen erop dat je weet hoe je dit kunt berekenen</li>
+          <li>voor diegenen die het vergeten zijn: de oppervlakte van een <em>Driehoek</em> kan berekend worden vanuit de lengte van de zijden als <code><em>&radic;</em>(s(s-a)(s-b)(s-c))</code> waarbij s de halve omtrek is en a, b, c de zijden</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>instantiëer van alle constructors minstens &eacute;&eacute;n object, en pas de methods <em>spreek() </em>en <em>schrijf() </em>er op toe</li>
+  <li> de <em>tekst</em> bevat <br>
+    <i>&quot;Hallo, ik ben [naam], ik ben een [type]&quot;</i> en afhankelijk van de soort vorm<br>
+    <i>&quot;,  ik heb een straal van [straal] , een oppervlakte van [oppervlakte] en een omtrek van [omtrek]&quot;</i>,  of <br>
+    <i>&quot;,  ik heb [aantaHoeken] hoeken  , een oppervlakte van [oppervlakte] en een omtrek van [omtrek]&quot;</i>. </li>
+</ul>
+<div id="output"></div>
+</body>
+</html>
