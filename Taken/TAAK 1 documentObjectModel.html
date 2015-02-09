@@ -18,6 +18,10 @@ img{
 		var eTitel			=	document.getElementById('kop');			// referentie naar node
 		eTitel.innerHTML	=	"De document Tree";
 		
+		/* wijzig tekst */
+		var sKoffie			=	document.getElementsByTagName('p')[0];
+		sKoffie.innerHTML	=	"De meeste programmeurs <em> leven </em> op koffie en <em> chocolade. </em>";
+		
 		/* wijzig de tekst van het tweede list item */
 		var eBolletjes		= 	document.getElementsByTagName('li');
 		var nAantal			=	eBolletjes.length;
@@ -40,6 +44,9 @@ img{
 		eImg.setAttribute("alt", sTooltip);
 		eImg.setAttribute("title", sTooltip);
 		
+		/* Voeg div 'footer' toe + tekst */
+		
+		
 	}
 
 </script>
@@ -49,7 +56,8 @@ img{
 <div id="container">
   <h1 id="kop">Het Document Object Model</h1>
   <!-- dit is HTML commentaar onzichtbaar in het beeld-->
-  <p><img src="../images/linda.jpg" alt="Linda, een front-end programmeur" />De meeste programmeurs <em>leven</em> op koffie</p>
+  <img src="../images/linda.jpg" alt="Linda, een front-end programmeur" />
+  <p>De meeste programmeurs <em>leven</em> op koffie</p>
   <p>Veel programmeurs zijn liefhebbers van <a href="http://en.wikipedia.org/wiki/Science-fiction">science-fiction</a></p>
   <div class="menu">
     <h2>Onze programmeertalen</h2>
