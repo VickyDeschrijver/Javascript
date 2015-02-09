@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JS adv project: cookieBank Applicatie</title>
+<link rel="stylesheet" href="../frameworks/bootstrap/css/bootstrap.min.css">
+<style media="screen" type="text/css">
+header {
+	padding:3em 0 2em 0;
+	background-color:#333399;
+	color:white;
+}
+footer {
+	text-align: center;
+	padding: 30px 0;
+	margin-top: 70px;
+	border-top: 1px solid #e5e5e5;
+	background-color: #f5f5f5;
+}
+#views {
+	margin-top:2em;
+}
+.view {
+	display:none;
+}
+.view .alert{
+	display:none;
+}
+#view_welkom .well {
+	display:none;
+}
+#view_exit .well.twee {
+	display:none;
+}
+
+</style>
+</head>
+<body>
+<header>
+<div class="container">
+  <h1>CookieBank</h1>
+  <h3>de bank met smaak!</h3>
+  <p>een vdab JS Adv project</p>
+  </header>
+  <div class="container">
+    <div id="views"> 
+      
+      <!-- welkom view -->
+      
+      <div class="view hero-unit" id="view_welkom">
+        <h4>Welkom bij de cookieBank!</h4>
+         <div class="alert">
+          <ul>
+            <li><strong>Waarschuwing</strong> dit kunt u niet doen</li>
+          </ul>
+        </div>
+        
+        <p class="intro">Nu een rekening openen = 100 &euro; startkapitaal ontvangen! </p>
+        <p>
+          <button class="btn btn-large btn-success" id="btnInschrijven">Nieuwe rekening</button>
+        </p>
+        <div class="well">
+          <form class="form-horizontal" id="frmInschrijven">
+            <div class="control-group">
+              <label class="control-label" for="naam">Uw naam</label>
+              <div class="controls">
+                <input type="text" name="voornaam" id="inputVoornaam" placeholder="voornaam">
+                <input type="text" name="familienaam" id="inputFamilienaam" placeholder="familienaam">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="email">Email</label>
+              <div class="controls">
+                <input type="text" name="email" id="inputEmail" placeholder="email">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="wachtwoord">Wachtwoord</label>
+              <div class="controls">
+                <input type="password" name="wachtwoord" id="inputPassword" placeholder="wachtwoord">
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                <button type="button" class="btn btn-info" id="btnSubmit">bevestigen</button>
+              </div>
+            </div>
+          </form>
+          <!-- einde well --> 
+        </div>
+        <!-- einde welkom view --> 
+      </div>
+      
+      <!-- klant view -->
+      <div class="view hero-unit" id="view_klant">
+         <h4>Beste klant</h4>
+         <div class="alert">
+          <ul>
+            <li><strong>Waarschuwing</strong> dit kunt u niet doen</li>
+          </ul>
+        </div>
+       
+        <div class="well">
+          <p class="intro"></p>
+          <form class="form-horizontal" id="frmInschrijven">
+            <div class="control-group">
+              <label class="control-label" for="saldo">Uw Saldo</label>
+              <div class="controls">
+                <input type="text" name="saldo" id="inputSaldo" disabled>
+              </div>
+            </div>
+             <div class="control-group">
+              <label class="control-label" for="bedrag">bedrag</label>
+              <div class="controls">
+                <input type="text" name="bedrag" id="inputBedrag" placeholder="bedrag">
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                <button type="button" class="btn btn-info" id="btnStorten" title="storten">+</button>
+                <button type="button" class="btn btn-info" id="btnAfhalen"  title="afhalen">-</button>
+               <button type="button" class="btn btn-info" id="btnRekSluiten" title="rekening sluiten">Rekening sluiten</button></div>
+            </div>
+            
+          </form>
+          
+          <!-- einde well --> 
+        </div>
+        <!-- einde klant view --> 
+      </div>
+      
+      <!-- exit view -->
+      <div class="view hero-unit" id="view_exit">
+        <h4>Rekening Afsluiten</h4>
+         <div class="alert">
+          <ul>
+            <li><strong>Waarschuwing</strong> dit kunt u niet doen</li>
+          </ul>
+        </div>
+         <div class="well een">
+         <p>Weet u zeker dat u de rekening wil afsluiten?</p>
+        <p>
+          <button class="btn btn-large btn-info"  id="btnTerug" >Neen, keer terug</button>&nbsp;
+          <button class="btn btn-large btn-warning"id="btnBevestigRekSluiten" >Ja, ik sluit mijn rekening af</button>
+        </p>
+         </div>
+          <div class="well twee">
+        <p>
+          <button class="btn btn-large btn-info"  id="btnGaDoor" >Ga door</button>&nbsp;
+        </p>
+         </div>
+        <!-- einde exit view --> 
+      </div>
+      
+      <!-- einde views --> 
+    </div>
+    <!-- einde container --> 
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <p>Copyright <a href="http://twitter.com/mdo" target="_blank">Cookiebank@vdab.be</a></p>
+    </div>
+  </footer>
+  <script src="../frameworks/jquery/jquery-1.10.2.min.js"></script> 
+  <script src="../frameworks/bootstrap/js/bootstrap.min.js"></script> 
+  <script src="../frameworks/jquery/jquery-cookie/jquery.cookie.js"></script> 
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+var oViews 		= {
+						welkom: {
+								elements:{
+										"root"				: $('#view_welkom'),
+										"titel"				: $('#view_welkom > h4'),
+										"intro"				: $('#view_welkom .intro'),
+									  	"well"				: $('#view_welkom .well'),
+									  	"form"				: $('#view_welkom form'),
+									  	"btnInschrijven"	: $('#btnInschrijven'),	
+									  	"inputVoornaam"		: $('input[name=voornaam]'),
+									  	"inputFamilienaam"	: $('input[name=familienaam]'),
+									  	"inputEmail"		: $('input[name=email]'),
+									  	"inputWachtwoord"	: $('input[name=wachtwoord]'),
+									  	"btnSubmit"			: $('#btnSubmit'),	
+										"boodschapBox"		: $('#view_welkom div.alert')
+									  }
+								},
+						klant: {
+								elements:{
+									  	"root"				: $('#view_klant'),
+									  	"titel"				: $('#view_klant > h4'),
+									  	"intro"				: $('#view_klant .intro'),
+										"well"				: $('#view_klant  .well'),
+									  	"form"				: $('#view_klant form'),
+									  	"inputSaldo"		: $('input[name=saldo]'),
+										"inputBedrag"		: $('input[name=bedrag]'),
+									  	"btnStorten"		: $('#btnStorten'),
+									  	"btnAfhalen"		: $('#btnAfhalen'),
+									  	"btnRekSluiten"		: $('#btnRekSluiten'),
+										"boodschapBox"		: $('#view_klant div.alert')
+									  }
+
+						},
+						exit: {
+								elements:{
+									  	"root"				: $('#view_exit'),
+									  	"titel"				: $('#view_exit > h4'),
+										"boodschapBox"		: $('#view_exit div.alert'),
+										"welleen"			: $('#view_exit  .well.een'),
+										"welltwee"			: $('#view_exit  .well.twee'),
+										"btnTerug"			: $('#btnTerug'),
+										"btnBevestigRekSluiten"		: $('#btnBevestigRekSluiten'),
+										"btnGaDoor"			: $('#btnGaDoor')
+								}
+						}
+					}
