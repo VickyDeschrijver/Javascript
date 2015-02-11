@@ -15,6 +15,56 @@ div.vb {
 }
 -->
 </style>
+
+<script>
+
+window.onload = function(){
+	  
+	//=============variabelen=======
+	
+	var eOutput 	= 	document.getElementById('output'); 
+	var eKnop 		= 	document.getElementById('deKnop');
+	var eGetal		= 	document.getElementById('getal');
+	
+	//=============event handlers====
+	
+	eKnop.onclick = function() {
+		 	var nGetal		=	eGetal.value;
+		  	if(nGetal=="" || isNaN(nGetal) || nGetal < 0) {
+				alert("Deze functie werkt enkel met (positieve) getallen");			  
+			} else {
+				if (nGetal == 0) {
+						eOutput.innerHTML	=	"1";
+					} else {
+						eOutput.innerHTML	=	facult(parseInt(nGetal));
+					}
+			}
+		 };
+} //einde window.onload
+
+	//==============functies============
+	function facult(n) {
+		//console.log(n);
+		// variabelen
+		var sTekst		=	"";
+		var nFac		=	1;
+		
+		// FOR
+		for (i = n; i > 1; i--) {
+			//console.log("a " + nFac)
+			nFac			=	nFac * i;
+			//console.log("b " + nFac, i);
+			var sTekst		=	nFac;
+		}
+		
+		//console.log(sTekst);
+		return sTekst;
+	};
+</script>
+
+
+
+
 </head>
 
 <body>

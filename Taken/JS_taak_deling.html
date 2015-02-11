@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JS PF taak: deling</title>
+<style media="screen">
+label {
+	display:inline-block;
+	width:100px;
+}
+div.vb {
+	background-color:#CCFFCC;
+	padding:1em;
+}
+</style>
+</head>
+
+<body>
+<h1>Javascript PF taak: Deling</h1>
+<h3>Opdracht: </h3>
+<ul>
+  <li>Lees twee getallen in. Deel het grootste door het kleinste en toon het resultaat in het <em>output element</em>. </li>
+  <li>ook negatieve getallen zijn toegelaten</li>
+  <li>herinner de gebruiker er aan dat je niet mag delen door 0. Waarschuw de gebruiker  in een  <em>berichtenvenster</em></li>
+  <li>we veronderstellen dat de input echt een getal is, <em>valideren</em> moet je nog niet doen</li>
+</ul>
+<h3>Geteste topics</h3>
+<ul>
+  <li>programmatielogica : selectie</li>
+</ul>
+<h3>Oplossing: </h3>
+
+<form name="frmDeling" id="frmDeling" method="get" action="">
+<p>
+<label for="getal1">getal 1</label>
+<input type="text" name="getal1" id="getal1">
+</p>
+<p>
+<label for="getal2">getal 2</label>
+<input type="text" name="getal2" id="getal2">
+</p>
+<p>
+<button type="button" id="deKnop">Bereken deling</button>
+</p>
+</form> 
+
+<div class="vb" id="output"></div>
+
+<script>
+
+var eKnop			=	document.querySelector('#deKnop');
+var eGetal1			=	document.getElementById('getal1');
+var eGetal2			=	document.getElementById('getal2');
+var eOutput			=	document.querySelector('#output');
+
+console.log('egetal: ' + eGetal1 +  eGetal2);
+
+
+
+// output naar DIV
+	// Anonieme functie waarin de functie 'deel' w opgeroepen. Deze output dan een bericht in innerHTML
+	
+
+eKnop.onclick		=	function (){
+	// Getallen zijn getallen
+	var nGetal1			=	parseInt(eGetal1.value);
+	var nGetal2			=	parseInt(eGetal2.value);
+	console.log('ngetal: ' + nGetal1 + ' ' + nGetal2);
+	
+	var antwoord 		= 	deel(nGetal1, nGetal2);
+	eOutput.innerHTML	=	antwoord;
+	};
+
+
+function deel(g1,g2) {
+	//alert('test');
+	console.log('functiegetal: ' + g1 +' ' + g2);
+	
+	if (g1 > g2) {
+		var grootste 	=	g1;
+		var kleinste 	=	g2;
+		}
+		else {
+			var grootste 	=	g2;
+			var kleinste 	=	g1;
+		}
+	
+	console.log('grootste: ' + grootste + '; kleinste: ' + kleinste);
+
+	// controle + deling
+	if (kleinste !== 0) {
+		sBericht		=	grootste / kleinste;
+	} else {
+		sBericht		=	'Sorry, u kan geen getallen delen door 0';
+	}
+	
+
+return sBericht 
+}
+
+</script>
+</body>
+</html>

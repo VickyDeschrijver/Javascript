@@ -45,9 +45,40 @@ img{
 		eImg.setAttribute("title", sTooltip);
 		
 		/* Voeg div 'footer' toe + tekst */
+		var eDiv			=	document.getElementById('container');
+		var eFooter			=	document.createElement('div');
+		//var eTag			=	document.createAttribute("id");
+		//var sFooterTekst	=	document.createTextNode('Je vind een job op de vdab website');
+		//eFooter.appendChild(sFooterTekst);
+		
+		eFooter.setAttribute("id", "footer");
+				
+		/* Maak link in tekst */
+		eFooter.innerHTML		=	'Je vind een job op de <a href="http://www.vdab.be">vdab</a> website';
+		eDiv.appendChild(eFooter);
+		
+		/* pas link 'Science Fiction' aan */
+		var sLink			=	document.getElementById('scifi');
+		sLink.href			=	'http://bit.ly/1afPPtX';
+		//sLink.innerHTML		=	'Science Fiction'
+		sLink.target		=	'_blank';
+		
+		/* Exacte breedte div#container */
+		//1247px
+		
+		/* java 'li' opzoeken en aanpassen */
+		var eTalen			=	document.getElementById('programeertalen');
+		var items			=	eTalen.getElementsByTagName('li');
+		var aantal			=	items.length;
+		var eLaatste		=	items[aantal-2];
+		console.log(eLaatste);
+		eLaatste.innerHTML	+= ' is de beste';
+			
 		
 		
-	}
+}
+
+		
 
 </script>
 
@@ -58,16 +89,24 @@ img{
   <!-- dit is HTML commentaar onzichtbaar in het beeld-->
   <img src="../images/linda.jpg" alt="Linda, een front-end programmeur" />
   <p>De meeste programmeurs <em>leven</em> op koffie</p>
-  <p>Veel programmeurs zijn liefhebbers van <a href="http://en.wikipedia.org/wiki/Science-fiction">science-fiction</a></p>
+  <p>Veel programmeurs zijn liefhebbers van <a href="http://en.wikipedia.org/wiki/Science-fiction" id="scifi">science-fiction</a></p>
   <div class="menu">
     <h2>Onze programmeertalen</h2>
-    <ul>
+    <ul id="programeertalen">
       <li>Javascript</li>
       <li>PHP</li>
       <li>ASP.Net</li>
       <li>Java</li>
+      
     </ul>
   </div>
+  <div>
+  <ul>
+  	<li>choco</li>
+    <li>confituur</li>
+    <li>kaas</li>
+    
+    </ul></div>
 </div>
 </body>
 </html>

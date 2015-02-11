@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JS PF taak: kindergeld</title>
+<style media="screen" type="text/css">
+<!--
+label {
+	display:inline-block;
+	width:100px;
+}
+div.vb {
+	background-color:#CCFFCC;
+	padding:1em;
+}
+-->
+</style>
+</head>
+<body>
+<h1>Javascript PF taak: kindergeld</h1>
+
+<h3>Opdracht: </h3>
+<ul>
+  <li>Een moeder heeft recht op &euro; 25,00 kindergeld per kind. Voor het       derde kind (en elk volgend kind) krijgt ze een toeslag van &euro; 12,50. Voor       het vijfde (en elk volgend) kind krijgt ze nog eens een toeslag van &euro;       7,50.</li>
+  <li>Als het maandloon van de moeder kleiner is dan of gelijk aan &euro;       500,00, dan krijgt ze 25% toeslag op het kindergeld. Maar als haar       maandloon groter is dan    &euro; 2000,00, dan krijgt ze 45% minder kindergeld.</li>
+  <li> Minimaal heeft een moeder altijd recht op &euro; 25,00 per kind.</li>
+  <li>Vul aantal kinderen en maandloon in, en <i>toon in het outputelement</i> het kindergeld waar de moeder recht op heeft. </li>
+  <li>indien een 0 of een negatief getal wordt ingevuld voor kinderen of maandloon, <em>waarschuw in een berichtenvenster</em></li>
+  <li>Bijv. : 6 kinderen en &euro; 1 500,00 maandloon &agrave; &euro; 215,00 kindergeld</li>
+  <li>validatie van getallen mag ook hier nog achterwege blijven</li>
+</ul>
+
+<h3>Geteste topics</h3>
+<ul>
+  <li>programmatielogica : selectie</li>
+</ul>
+<h3>Oplossing: </h3>
+
+<form name="frmKindergeld" id="frmKindergeld" method="get" action="">
+<p>
+<label for="kinderen">aantal kinderen</label>
+<input type="text" name="kinderen" id="kinderen">
+</p>
+<p>
+<label for="maandloon">maandloon</label>
+<input type="text" name="maandloon" id="maandloon">
+</p>
+<p>
+<button type="button" id="deKnop">Bereken kindergeld</button>
+</p>
+</form> 
+
+<div class="vb" id="output"></div>
+
+<script>
+
+var eKnop			=	document.querySelector('#deKnop');
+var eKinderen		=	document.getElementById('kinderen');
+var eMaandloon		=	document.getElementById('maandloon');
+var eOutput			=	document.querySelector('#output');
+
+// event onclick aanmaken
+eKnop.onclick			=	function() {
+	var antwoord		=	kindergeld();
+	eOutput.innerHTML	=	antwoord;
+}
+
+
+function kindergeld () {
+	var nKindergeld		=	25;
+	var nToeslag0		=	0;
+	var nToeslag1		=	0;		//	3 tot 5 kinderen
+	var nToeslag2		=	0;		//	5 of meer kinderen
+	var nToeslag3		=	0;		// 	Loon onder 500
+	var nToeslag4		=	0;		// 	Loon boven 2000
+	
+	var minLoon			=	500;
+	var maxLoon			=	2000;
+	
+	var cat1			=	12.50;	// 	toeslag bij 3 tot 5 kinderen
+	var cat2			=	7.50;	//	toeslag vanaf 5de kind
+	var cat3			=	0.25;	//	toeslag bij laag loon
+	var cat4			=	0.45;	//	Afhaling bij hoog loon
+	
+		// objecten -> getallen
+	var nKinderen		=	parseInt(eKinderen.value);
+	var nMaandloon		=	parseInt(eMaandloon.value);
+	
+	//console.log('Aantal kinderen: ' + nKinderen + '; Maandloon: ' + nMaandloon);
+	
+	// controle getallen != 0
+	if (nKinderen <= 0 || nMaandloon <= 0) {
+		sBericht 		= 	"Gelieve een getal groter dan 0 in te geven";
+	}
+	else {
+		// berekening op basis aantal kinderen
+		if (nKinderen < 3) {
+			nToeslag0 		= 	nKindergeld * nKinderen;
+			//console.log('Toeslag0 ' + nToeslag0);
+		} else if (nKinderen < 5 && nKinderen > 2) {
+			nToeslag1 		=	(nKinderen * nKindergeld) + ((nKinderen - 2) * cat1);	
+			//console.log('Toeslag1 ' + nToeslag1);
+		} else {
+			nToeslag2		=	(nKinderen * nKindergeld) + ((nKinderen - 2) * cat1) + ((nKinderen - 4) * cat2);
+			//console.log('Toeslag2 ' + nToeslag2);
+		}
+		
+		var nVoorlopigTotaal = nToeslag0 + nToeslag1 + nToeslag2;
+		//console.log('Voorlopig ' + nVoorlopigTotaal);
+		
+		// berekening op basis van maandloon
+		if (nMaandloon <= minLoon) {
+			nToeslag3		=	nVoorlopigTotaal * cat3;
+			//console.log('Toeslag3 ' + nToeslag3);
+		} else if (nMaandloon > maxLoon) {
+			nToeslag4		=	nVoorlopigTotaal * cat4;
+			//console.log('Toeslag4 ' + nToeslag4);
+		} 
+		
+		
+		var nTotaal			=	nVoorlopigTotaal + nToeslag3 - nToeslag4;
+		//console.log('totaal: ' + nTotaal + '; cat3: ' + nToeslag3 + '; cat4: ' + nToeslag4);
+		
+		
+		// controle voldoende kg
+		if (nTotaal/nKinderen >= nKindergeld) {
+			sBericht 			=	"Uw heeft recht op " + nTotaal + " euro kindergeld."
+		} else {
+			sBericht 			=	"Uw heeft recht op " + (nKinderen * nKindergeld) + " euro kindergeld."
+		}
+		//console.log(sBericht);
+		return sBericht;
+	};	
+}
+
+</script>
+
+
+
+</body>
+</html>
