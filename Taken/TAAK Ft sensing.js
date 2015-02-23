@@ -17,11 +17,14 @@ window.onload 	= 	function() {
 		throw new Error("array aModernArt niet gevonden");
 	}
 	else {
-		console.log("test - " + aLijstFeatures[0]);		// is arrayLijst aanwezig?
-		
+		console.log("test - " + aLijstFeatures[0]);		// is arrayLijst aanwezig?	
 	}
 	
-	checkFeatures();
+	var eOutput			=	document.querySelector('table');
+	var antwoord 		= 	checkFeatures();
+	eOutput.innerHTML	=	antwoord;
+	
+	
 	
 }	// einde window.onload
 
@@ -31,12 +34,16 @@ function checkFeatures(i, eCheck) {
 	// array inlezen
 	for (var i=0; i < lijstAantal; i++) {
 		var aLijst		=	aLijstFeatures[i][0];
-		if (eval(aLijst)){								// eval = positief
-			// console.log("check" + (eval(aLijst)));
+		
+		if (eval(aLijst)){		 						// eval = positief
 			
 			
+			
+							
+			console.log("check" + (eval(aLijst)));
 		} else { 										// eval = negatief
-		//console.log("CHOCK");
+		
+		console.log("CHOCK" + (eval(aLijst)));
 		}
 
 		//console.log(aLijst);
@@ -48,3 +55,4 @@ function checkFeatures(i, eCheck) {
 	
 	
 }
+
