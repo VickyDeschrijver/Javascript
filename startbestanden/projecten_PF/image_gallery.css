@@ -58,3 +58,6 @@ select {
 	color:red;
 	font-weight:bold;
 	}
+
+.hidden { display: none; }
+.unhidden { display: block; }
