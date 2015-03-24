@@ -14,7 +14,7 @@ function leegNode(objNode) {
 /**************** Datum, tijd functies************/
 
 // globale datum objecten
-var vandaag         =   new Date();
+var vandaag         =   new Date();             // huidige datum
 var huidigeDag      =   vandaag.getDate();      // dag vd maand
 var huidigeWeekdag  =   vandaag.getDay();       // weekdag
 var huidigeMaand    =   vandaag.getMonth();     // maand
@@ -35,16 +35,8 @@ function isSchrikkeljaar(jaar) {
     return: boolean
      */
     eindwaarde=false;
-    if (isNaN(jaar)) {
-        if (jaar%4 === 0 ) {
-            eindwaarde = true;
-            if (jaar%100 === 0) {
-                eindwaarde = false;
-                if (jaar%400 === 0) {
-                    eindwaarde = true;
-                }
-            }
-        }
+    if(   jaar % 4 == 0 && (jaar % 100 != 0 || jaar % 400 == 0)     ) {
+        eindwaarde=true;
     }
     return eindwaarde;
 }

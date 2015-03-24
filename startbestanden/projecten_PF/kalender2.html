@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>JS PF project: kalender</title>
+<link rel="stylesheet" href="kalender2.css" type="text/css" />
+<style media="screen" type="text/css">
+<!--
+noscript div {
+	color:red;
+}
+
+#kalender{
+	background-color:#69F;
+	padding:1em;
+	overflow:auto;
+	}
+div.maandContainer{
+		height:170px;
+		float:left;
+	}
+-->
+</style>
+
+<script type="text/javascript" src="nuttig_lib.js">
+		<!-- algemene js library -->
+</script>
+
+<script type="text/javascript">
+	window.onload	=	function() {
+		// DOM elementen
+		var divOutput	=	document.getElementById('output');
+		var divKalender	=	document.getElementById('kalender');
+		var verjaardag	=	new Date(huidigJaar, 06, 26);
+
+		// divKalender.innerHTML	=	maakMaandTabel(huidigJaar, huidigeMaand);
+		divKalender.innerHTML	=	maakJaarKalender(huidigJaar);
+		dagAanduiden(vandaag, 'vandaag');			// huidige datum aanduiden
+		dagAanduiden(verjaardag, 'verjaardag');
+
+		/*// leeg inhoud
+		leegNode(divOutput);	// haalt tekst weg uit divOutput - functie uit nuttig_lib.js*/
+
+		// plaatst huidige tijd en datum in output element
+		divOutput.innerHTML		=	getVandaagStr();
+	}
+
+	function maakMaandTabel(kalenderJaar, maandIndex) {
+		/* Dependency: nuttig_lib.js
+		return			String, voor innerHTML: een tabelletje met een maandoverzicht
+		@ kalenderJaar	Integer, 4 digit jaar
+		@ maandIndex	integer, van 0 - 11
+		 */
+
+		// controle argumenten
+		if (isNaN(kalenderJaar) || (kalenderJaar.toString().length != 4)) {
+			return "fout jaargetal";
+		}
+		if (isNaN(maandIndex) || (maandIndex < 0) || (maandIndex > 11)) {
+			return "fout maandgetal";
+		}
+
+		// weekdag van de eerste dag van de maand
+		var start_datum		=	new Date(kalenderJaar, maandIndex, 1);
+		var start_weekdag	=	start_datum.getDay();
+
+		// bepaal einddag voor die maand, mogelijke uitzondering februari van schrikkeljaar
+		var eindDag			=	arrMaanden[maandIndex][1];
+		if ((maandIndex == 1) && (isSchrikkeljaar(kalenderJaar))) {eindDag=29}
+
+		// opbouw returnwaarde string
+		strMaandtabel		=	"<table class='kalender'>\n";
+		// titelrij
+		strMaandtabel		+=	"<tr> <th colspan='7'>" + arrMaanden[maandIndex][0] + " ";
+		strMaandtabel		+=	kalenderJaar + "</th> </tr>\n";
+
+		// dagtitels
+		strMaandtabel		+=	"<tr>";
+		for (var i=0; i<7; i++) {
+			strMaandtabel	+=	"<td>" + arrWeekdagen[i].substr(0,2).toUpperCase() + "</td>";
+		}
+		strMaandtabel		+=	"</tr>\n";
+
+		var dag		=	1;
+		var teller	=	0;
+
+		while (dag <= eindDag) {
+			//weekrij
+			strMaandtabel	+=	"<tr>";
+			for (var i=0; i < 7; i++) {
+				// teken cellen met of zonder dag ingevuld
+				var strId			=	'';					// id samengesteld uit maandIndex en dagnummer
+				var strDagnummer	=	'';					// het dagnummer
+				//schrijf de dagen
+				if ((teller >= start_weekdag) && (dag <= eindDag)) {
+					strDagnummer	=	dag;
+					strId			=	" id='" + kalenderJaar + "_" + maandIndex + "_" + dag + "'";
+					dag++;
+				}
+			// schrijf de cel
+				strMaandtabel		+=	"<td " + strId + ">" + strDagnummer + "</td>";
+				teller++;
+			}
+		strMaandtabel	+=	"</tr>\n";
+		}
+	strMaandtabel		+=	"</table>\n";
+		return strMaandtabel;
+
+
+	}
+
+	function maakJaarKalender(kalenderJaar) {
+		/* dependency: 	maakMaandTabel
+		return:			string, voor innerHTML: 12 maandtabellen
+
+		@ kalenderJaar	integer, 4 digit jaar
+		*/
+
+		strJaarKalender		=	"";
+		for (var i=0; i<12; i++) {
+			strJaarKalender		+=	"<div class='maandContainer'>";
+			strJaarKalender		+=	maakMaandTabel(kalenderJaar, i);
+			strJaarKalender		+=	"</div>";
+		}
+	return strJaarKalender;
+	}
+
+	function dagAanduiden(oDatum, CSS_Class) {
+		/* nodig:	CSS class in stylesheet
+					id in element
+		@ oDatum	datum object van aan te duiden dag
+		@ CSS_Class	CSS class dient aanwezig te zijn
+		 */
+
+		// welk jaar, maand, dag?
+		var dDag		=	oDatum.getDate();
+		var dMaand		=	oDatum.getMonth();
+		var dJaar		=	oDatum.getFullYear();
+
+		// construeer id voor cel
+		var strId		=	dJaar + "_" + dMaand + "_" + dDag;
+		var dCel		=	document.getElementById(strId);
+		if (dCel) {
+			dCel.className	=	CSS_Class;
+		}
+	}
+
+</script>
+
+</head>
+<body>
+<h1>JS PF project: JS Kalender</h1>
+<div id="output"></div>
+<div id="kalender"></div>
+</body>
+</html>
