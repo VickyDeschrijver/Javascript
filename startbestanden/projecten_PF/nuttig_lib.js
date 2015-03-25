@@ -80,13 +80,13 @@ function getCookie(naam) {
     var zoek    =   naam + "=";
     if(document.cookie.length>0) {
         var begin   =   document.cookie.indexOf(zoek);
-        if(begin = -1) {
+        if(begin != -1) {
             begin   +=  zoek.length;
             var einde   =   document.cookie.indexOf(";", begin);
             if (einde == -1) {
                 einde   =   document.cookie.length;
             }
-            return document.cookie.substring(begin + zoek.length, einde);
+            return document.cookie.substring(begin, einde);
         }
     }
 }

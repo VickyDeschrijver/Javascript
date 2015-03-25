@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Taalkeuze</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+ window.onload = function(){
+  if(localStorage){
+   //kan deze browser dit script aan?
+   console.log('localStorage OK');
+   if(localStorage.taalkeuze){
+      var sTaalkeuze = localStorage.getItem('taalkeuze');
+      window.location.href = sTaalkeuze +".html";
+      //console.log(sTaalkeuze);
+   }  
+   else{
+     var eOutput = document.getElementById('output');
+     var eDiv_be = document.createElement('div');
+     var eDiv_fr = document.createElement('div');
+     var eDiv_en = document.createElement('div');
+     
+     eDiv_be.setAttribute('id','be');
+     eDiv_fr.setAttribute('id','fr');
+     eDiv_en.setAttribute('id','en');
+     
+     //================== nederlands =========================
+     var eImg_be = document.createElement('img');
+     eImg_be.src = "../images/be.png";
+     eImg_be.alt = "belgische vlag";
+     eImg_be.title = "belgische vlag";
+     
+     var eLink_be = document.createElement('a');
+     eLink_be.href = "nederlands.html";
+     var tNode_be = document.createTextNode(' Nederlands');
+     eLink_be.appendChild(tNode_be);
+     eLink_be.onclick = function(e){setTaalKeuze('nederlands');};     
+     eDiv_be.appendChild(eImg_be);
+     eDiv_be.appendChild(eLink_be);
+     //================== einde nederlands ==================================
+     //
+     //================== frans =============================================
+     var eImg_fr = document.createElement('img');
+     eImg_fr.src = "../images/fr.png";
+     eImg_fr.alt = "drapeau de la france";
+     eImg_fr.title = "drapeau de la france";
+     
+     var eLink_fr = document.createElement('a');
+     eLink_fr.href = "français.html";
+     var tNode_fr = document.createTextNode(' Français');
+     eLink_fr.appendChild(tNode_fr);
+     eLink_fr.onclick = function(e){setTaalKeuze('français');};
+     
+     eDiv_fr.appendChild(eImg_fr);
+     eDiv_fr.appendChild(eLink_fr);
+     
+     //======================== einde frans ====================================
+     //
+     //============================engels ======================================
+      var eImg_en = document.createElement('img');
+     eImg_en.src = "../images/gb.png";
+     eImg_en.alt = "english flag";
+     eImg_en.title = "english flag";
+         
+     var eLink_en = document.createElement('a');
+     eLink_en.href = "english.html";
+     var tNode_en = document.createTextNode(' English');
+     eLink_en.appendChild(tNode_en);
+     eLink_en.onclick = function(e){setTaalKeuze('english');};
+     eDiv_en.appendChild(eImg_en);
+     eDiv_en.appendChild(eLink_en);
+     //============================ einde engels ============================== 
+     
+     eOutput.appendChild(eDiv_be);
+     eOutput.appendChild(eDiv_fr);
+     eOutput.appendChild(eDiv_en);
+    };
+  };
+ };
+ function setTaalKeuze(taalkeuze){
+  window.localStorage.setItem('taalkeuze', taalkeuze);
+  //window.history.go(0);
+ };
+</script>
+</head>
+ <body>
+  <h1>Intro</h1>
+<div id="output"></div>
+ </body>
+</html>
