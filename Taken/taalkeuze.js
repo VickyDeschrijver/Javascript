@@ -4,11 +4,11 @@
 
 // bepaal huidige taal
 
-var huidigeTaal     =   "";
 
 window.onload 	= 	function() {
 
 
+    var huidigeTaal     =   "";
 
 
     //check arrays.js geladen
@@ -20,24 +20,33 @@ window.onload 	= 	function() {
 
 
         // taal bepalen
-        var tl  =   "";
+        //var tl  =   "";
         var elinkNl      =   document.getElementById('NL');
         var elinkFr      =   document.getElementById('FR');
         var elinkEng     =   document.getElementById('ENG');
+        //
+        var url =   "";
+        elinkNl.addEventListener('click', function() {zetTaal('nl.html')});
+        elinkFr.addEventListener('click', function() {zetTaal('fr.html')});
+        elinkEng.addEventListener('click', function() {zetTaal('eng.html')});
 
-        elinkNl.addEventListener('click', function() { zetTaal('NL')});
-        elinkFr.addEventListener('click', function() { zetTaal('FR')});
-        elinkEng.addEventListener('click', function() { zetTaal('ENG')});
+
+        //zet taal naar tags
 
 
-        huidigeTaal =   tl;
+
+        //
+        //huidigeTaal =   tl;
+        console.log('taal: ' + huidigeTaal);
+
+
 
         // tag cloud zetten
         var eKader		=	document.getElementById('cloudbox');
         var nArray		=	aLijstWoorden;
 
         var nAantalTags2=	aLijstWoorden.length;
-        tagsMaken(eKader, aLijstWoorden);
+        tagsMaken(eKader, aLijstWoorden, huidigeTaal);
 
     }
 
@@ -48,24 +57,26 @@ window.onload 	= 	function() {
 
 }	// einde window.onload
 
-function zetTaal(taal) {
-    switch (taal){
-        case 'NL':
-            tl =   0;
-            break;
-        case 'FR':
-            tl =   1;
-            break;
-        case 'ENG':
-            tl =   2;
-            break;
+function zetTaal(url) {
+    if (url != null) {
+        setCookie('zetTaal', url, new Date (vandaag));
+        document.location.href  =   url;
+    }
+    else {
+        url =   getCookie('zetTaal');
+        if (url != null) {
+            document.location.href  =   url;
+        }
+        else {
+            document.location.href  =   "taalkeuze.html";
+        }
     }
 
 
 }
 //--------------------------------------------
 
-function tagsMaken(eKader, array) {
+function tagsMaken(eKader, array, huidigeTaal) {
     /*	Functie maakt span elementen aan in container
      *	zet er kleur op - fonsize
      *	Bepaalt positie
