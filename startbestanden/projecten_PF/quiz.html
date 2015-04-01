@@ -8,7 +8,7 @@
 	position:relative;
 }
 .vraag {
-	position:relative;
+	position:absolute;
 	top:30px;
 	left:0;
 	background-color:#EBE54D;
@@ -21,6 +21,7 @@
 .vraag p {
 	margin:1em;
 	font-weight:bold;
+
 }
 .vraag img {
 	float:left;
@@ -71,7 +72,226 @@ p.score {
 	font-size:3em;
 	color: #FF0051;
 }
+ul li {
+	list-style-type: none;
+	padding: 0.450em 0;
+	font-weight: bold;
+}
+ul li a {
+	text-decoration: none;
+}
+
 </style>
+
+<script src="../js/json2.js"></script>
+<script src="quiz.json" type="text/javascript"></script>
+<script>
+
+	//------------ globals------------
+	// date augmentation voor method getWeek
+	Date.prototype.getWeek	=	function() {
+		var onejan	=	new Date(this.getFullYear(),0,1);
+		return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1) / 7);
+	}
+
+	var oQuiz		=	{};
+
+	window.onload	=	function() {
+		oQuiz		=	JSON.parse(jsonQuiz);
+		oQuiz.score	=	[];
+		console.log(oQuiz.vragen[0].vraag);
+
+		var eQuiz	=	document.getElementById('quiz');
+		eQuiz.appendChild(maakDfQuiz());
+	} // einde window.onload
+
+	function maakDfQuiz(json) {
+		/* return documentFragment voor quiz
+		quiz structuur: DIV met IMG's en UL
+		 */
+
+		var dfQuiz		=	document.createDocumentFragment();
+		var aVragen		=	oQuiz.vragen;
+		var nVragen		=	aVragen.length;
+
+		// titel
+		var dDatum		=	new Date(oQuiz.datum);
+		var sTitel		=	"Quiz van de week " + dDatum.getWeek();		// augmentation method
+		var eTitel		=	document.createElement('h2');
+		eTitel.appendChild(document.createTextNode(sTitel));
+		dfQuiz.appendChild(eTitel);
+
+		// de vragen
+		for (var i=0; i < nVragen; i++) {
+			// DIV als container voor elke vraag
+			var oVraag				=	aVragen[i];
+			var eVraagContainer		=	document.createElement('div');
+			eVraagContainer.setAttribute("class", "vraag");
+			eVraagContainer.setAttribute("data-index", i);
+			eVraagContainer.id		=	"vraag_" + i;
+
+			if(i==0) {eVraagContainer.style.zIndex=10;}
+
+			var eVraag				=	document.createElement('p');
+			var sVraag				=	document.createTextNode(oVraag.vraag);
+			eVraag.appendChild(sVraag);
+			eVraagContainer.appendChild(eVraag);
+
+			// eventuele images
+			if(oVraag.media) {
+				var eImage	=	document.createElement('img');
+				eImage.src	=	"../images/" + oVraag.media;
+				eVraagContainer.appendChild(eImage);
+			}
+
+			// Antwoorden
+			var eAntwoordenLijst	=	document.createElement('ul');
+			var aAntwoorden			=	oVraag.antwoorden;
+			var nAntwoorden			=	aAntwoorden.length;
+			var nCorrect			=	oVraag.correct;
+
+			// lus doorheen alle antwoorden
+			for (var k=0; k < nAntwoorden; k++) {
+				var eAntwoord		=	document.createElement('li');
+				var eLink			=	document.createElement('a');
+				eLink.setAttribute("href", "#");
+				eLink.setAttribute("data-index", k);
+				var bCorrect		=	(k==nCorrect);
+				eLink.setAttribute("data-correct", bCorrect);
+				eLink.addEventListener("click", function(e) {evalVraag(e, this);});
+				eLink.appendChild(document.createTextNode(aAntwoorden[k]));
+				eAntwoord.appendChild(eLink);
+				eAntwoordenLijst.appendChild(eAntwoord);
+			}
+			eVraagContainer.appendChild(eAntwoordenLijst);
+
+			// NAVBALK met VORIGE VOLGENDE
+			eVraagContainer.appendChild(maakNav(i));
+
+			// Feedback
+			var eFeedback		=	document.createElement('p');
+			eFeedback.setAttribute("class", "feedback");
+			eFeedback.appendChild(document.createTextNode(oVraag.tekst));
+			eVraagContainer.appendChild(eFeedback);
+
+			dfQuiz.appendChild(eVraagContainer);
+
+		} // einde lus vragen
+
+		// extra container eindscore
+		var eScoreContainer		=	document.createElement('div');
+		eScoreContainer.setAttribute("class", "vraag");
+		eScoreContainer.id		=	"score";
+		dfQuiz.appendChild(eScoreContainer);
+
+		return dfQuiz;
+	}
+
+	function evalVraag(e, lienk) {
+		// evalueert een quizvraag
+		e.preventDefault();
+
+		// zoek de parent Vraagcontainer van de lienk
+		var eVraag		=	function(node) {
+			while(node.parentNode) {
+				if(node.parentNode.className == 'vraag') {
+					return node.parentNode;
+				}
+			node	=	node.parentNode;
+			}
+		}(lienk)
+	var nVraag		=	parseInt(eVraag.dataset["index"]);
+	var nAntwoord	=	parseInt(lienk.dataset["index"]);
+	var sCorrect	=	lienk.dataset["correct"];
+	var bJuist		=	(sCorrect=="true");
+	var sJuist		=	bJuist?"correct":"fout";
+	oQuiz.score[nVraag]	=	bJuist;
+	console.log(oQuiz.score);
+
+	var eFeedback	=	eVraag.querySelector("p.feedback");
+	var eCorrect	=	eFeedback.querySelector("span.correct");
+	var sResultaat	=	"antwoord " + ++nAntwoord + " was " + sJuist;
+
+		if(eCorrect) {
+			eCorrect.innerHTML	=	sResultaat;				// er was al een span
+		}
+		else {
+			eFeedback.innerHTML	=	"<span class='correct'>" + sResultaat + "</span><br>" + eFeedback.innerHTML;
+		}
+	eFeedback.style.display	=	"block";					// toon feedback
+	eindScore();
+
+	}
+
+	function eindScore() {
+		/* update de tekst met eindscore in eindscorecontainer
+		@ oQuiz		global
+		 */
+
+		var nVragen		=	oQuiz.vragen.length;
+		var nBeantwoord	=	0;
+		var nJuist		=	0;
+		var eScore		=	document.querySelector("#score");
+
+		for(var i=0; i < oQuiz.score.length; i++) {
+			if(typeof(oQuiz.score[i]) != "undefined") { ++nBeantwoord }
+			if(oQuiz.score[i]===true) { ++nJuist }
+		}
+
+	var sScore			=	"<p class='score'> Uw score is " + nJuist + "/" + nVragen + " <br>(" + nBeantwoord + " beantwoord)</p>";
+	eScore.innerHTML	=	sScore;
+
+	}
+
+	function maakNav(index) {
+		/* returnt navbalkje met vorige volgende hyperlinks
+		@index		de index van deze vraag
+		 */
+
+		var nMaxIndex		=	oQuiz.vragen.length;
+		var nVorigeIndex	=	index-1;
+		var nVolgendeIndex	=	index+1;
+
+		var eNav			=	document.createElement('div');
+		eNav.setAttribute("class", "nav");
+
+		// eerste vraag geen vorige hyperlink
+		if(index > 0) {
+			var eVorige			=	document.createElement('a');
+			eVorige.setAttribute("href", "#");
+			eVorige.setAttribute("title", "vorige vraag:" + nVorigeIndex);
+			eVorige.innerHTML	=	"&lt;&lt;";
+			eVorige.addEventListener("click", function(e) {toonVraag(nVorigeIndex);});
+			eNav.appendChild(eVorige);
+		}
+		if (index <= nMaxIndex) {
+			var eVolgende		=	document.createElement('a');
+			eVolgende.setAttribute("href", "#");
+			eVolgende.setAttribute("title", "volgende vraag:" + nVolgendeIndex);
+			eVolgende.innerHTML	=	"&gt;&gt;";
+			eVolgende.addEventListener("click", function(e) {toonVraag(nVolgendeIndex);});
+			eNav.appendChild(eVolgende);
+		}
+	return eNav;
+	}
+
+	function toonVraag(index) {
+		/* toont een vraag door de z-index hoog te zetten
+		@index		index in de collection 'vraag' elementen (inclusieg de eindscore container)
+		 */
+
+		var eVragen		=	document.querySelectorAll(".vraag");
+		for(var i=0; i < eVragen.length; i++) {
+			if(i==index) {
+				eVragen[i].style.zIndex	=	10;
+			}
+			else {
+				eVragen[i].style.zIndex	=	0;
+			}
+		}
+	}
+
+</script>
 </head>
 <body>
 <h1>JS PF project: Quiz van de week</h1>
