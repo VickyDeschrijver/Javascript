@@ -51,6 +51,7 @@ body {
 	color:#205c34;
 	padding:1em 0;
 	}
+
 /*******************WINKELMANDJE*******************/
 
 #winkelmandje{
@@ -70,11 +71,23 @@ body {
 	}
 #winkelmandje .cel{
 	float:left;
-	padding:  2px;
+	padding:  2px 0;
 	
 	}
-#winkelmandje .cellinks		{width:196px;text-align:left;}
-#winkelmandje .celrechts	{float:right;width:96px;text-align:right;background-color:#ff4116; }
+#winkelmandje .cellinks		{
+	width: 26%;
+	display: inline-block;
+
+	text-align:left;
+
+}
+
+#winkelmandje .celrechts	{
+	float:right;
+	width:96px;
+	text-align:right;
+	background-color:#ff4116;
+}
 
 #winkelmandje #totaal{
 	background-color:#FFF;
@@ -140,7 +153,11 @@ ul.fouten {
 	font-size:0.9em;
 	padding:3px;
 	margin: 3px 0;
+	float: right;
 	}
 ul.fouten li{
 	color:red;
+	font-weight: bold;
+	font-size: small;
+	float: right;
 	}

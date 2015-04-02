@@ -5,6 +5,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>JS PF Eindoefening</title>
 <link rel="stylesheet" href="JS_PF_eindoefening.css" />
+<script type="text/javascript" src="eindoefening.js"></script>
+
+
+
 </head>
 <body>
 <div id="container">
@@ -18,20 +22,20 @@
     <form id="frmBestel" name="frmBestel" action="js_form_ontvanger.html" method="get">
       <p>
         <label for="winkel">kies winkel</label>
-        <select name="winkel" id="winkel">
+        <select name="winkel" id="winkel" class="winkel">
           <option value="">--- kies uw winkel ---</option>
         </select>
       </p>
       <p>
         <label for="groente">kies groente</label>
-        <select name="groente" id="groente">
+        <select name="groente" id="groente" class="groente">
           <option  value="">--- maak uw keuze ---</option>
         </select>
         <label class="inline" for="aantal">aantal/gewicht</label>
-        <input type="text" class= "number" name="aantal" id="aantal" />
+        <input type="text" class= "number required" name="aantal" id="aantal" />
       </p>
       <p>
-        <button type="button" id="toevoegen">OK, gooi maar in mijn mandje</button>
+        <button type="button" id="toevoegen" name="toevoegen">OK, gooi maar in mijn mandje</button>
       </p>
     </form>
     <div id="winkelmandje">
