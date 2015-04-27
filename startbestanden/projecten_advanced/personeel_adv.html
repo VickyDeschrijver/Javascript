@@ -31,5 +31,116 @@ table {
 
 
 <div id="output"></div>
+
+<script>
+	'use strict';
+
+	//================= DOM ==============
+	var eOutput	=	document.querySelector('#output');
+
+	/*+++++++++++++++++ OBJECTEN ++++++++++++++++++++*/
+	// literal
+	var paul	=	{
+		naam:			"Paul",
+		geslacht:		"m",
+		leeftijd:		50,
+		geboorteDatum:	new Date(1960,9,12),
+		hobbies:		["tennis", "zwemmen", "videogames"],
+		gehuwd:			true,
+		kinderen:		[
+			{	naam:		"Anthony",
+				gewicht:	36,
+				gehuwd:		false,
+				geboorteDatum:	new Date(1999,1,31)
+			},
+			{	naam:		"Leen",
+				gewicht:	65,
+				gehuwd:		false,
+				geboorteDatum:	new Date(1989,11,7)
+			}
+		],
+		spreek:			function() {
+			alert("Hallo, " + this.naam + " hier, ik heb " + this.kinderen.length + " kinderen.");
+		}
+	};
+
+	// met constructor
+	var veerle			=	new Object();
+	veerle.naam			=	"Veerle";
+	veerle.geslacht		=	"v";
+	veerle.gehuwd		=	true,
+	veerle.geboorteDatum	=	new Date(1964,5,11);
+
+	/*+++++++++++++++++ CONSTRUCTORS ++++++++++++++++++++*/
+	/**** Persoon Class ****/
+	function Persoon(sNaam, nLeeftijd, sGeslacht) {
+		this.naam		=	sNaam;
+		this.leeftijd	=	nLeeftijd;
+		this.geslacht	=	sGeslacht;
+	}
+
+	// instanties
+	var kurt	=	new Persoon("Kurt", 49, "m");
+	var ann		=	new Persoon("Ann", 51, "v");
+
+
+
+	/*+++++++++++++++++ UITVOEREN ++++++++++++++++++++*/
+	paul.functie	=	"webontwikkelaar";
+//	delete paul.naam;
+//	paul.spreek();
+
+	console.log(enumerate(paul));
+	eOutput.innerHTML	=	enumerateHTML(paul);
+	console.log(ann);
+	eOutput.innerHTML	=	enumerateHTML(kurt);	// overschrijft vorige - paul
+
+	var jsonPaul	=	JSON.stringify(paul);
+	console.log(jsonPaul);
+	var jsonVeerle	=	JSON.stringify(veerle);
+	console.log(jsonVeerle);
+
+
+
+	/*+++++++++++++++++ FUNCTIES ++++++++++++++++++++*/
+	function enumerate(obj) {
+		// Overloop alle eigenschappen van een object
+		// return string
+
+		var strProps	=	"";
+
+		for (var key in obj) {
+			if(typeof obj[key] === "object") {
+				strProps	+=	enumerate(obj[key]);
+			} else {
+				strProps	+=	key + "(" + typeof obj[key] + "): " + obj[key] + "\n";
+			}
+		}
+		return strProps;
+	}
+
+	function enumerateHTML(obj) {
+		// Overloop alle eigenschappen van een object
+		// return string voor innerHTML
+
+		var strProps	=	"<ul>";
+
+		for (var key in obj) {
+			if(typeof obj[key] === "object") {
+				strProps	+=	"<li>";
+				strProps	+=	key;
+				strProps	+=	enumerateHTML(obj[key]);
+				strProps	+=	"</li>";
+			} else {
+				strProps	+=	"<li>" + key + "(" + typeof obj[key] + "): " + obj[key] + "</li>\n";
+			}
+		}
+		strProps	+=	"</ul>\n";
+		return strProps;
+	}
+
+
+</script>
+
 </body>
 </html>
