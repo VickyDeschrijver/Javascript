@@ -38,38 +38,8 @@ table {
 	//================= DOM ==============
 	var eOutput	=	document.querySelector('#output');
 
-	/*+++++++++++++++++ OBJECTEN ++++++++++++++++++++*/
-	// literal
-	var paul	=	{
-		naam:			"Paul",
-		geslacht:		"m",
-		leeftijd:		50,
-		geboorteDatum:	new Date(1960,9,12),
-		hobbies:		["tennis", "zwemmen", "videogames"],
-		gehuwd:			true,
-		kinderen:		[
-			{	naam:		"Anthony",
-				gewicht:	36,
-				gehuwd:		false,
-				geboorteDatum:	new Date(1999,1,31)
-			},
-			{	naam:		"Leen",
-				gewicht:	65,
-				gehuwd:		false,
-				geboorteDatum:	new Date(1989,11,7)
-			}
-		],
-		spreek:			function() {
-			alert("Hallo, " + this.naam + " hier, ik heb " + this.kinderen.length + " kinderen.");
-		}
-	};
 
-	// met constructor
-	var veerle			=	new Object();
-	veerle.naam			=	"Veerle";
-	veerle.geslacht		=	"v";
-	veerle.gehuwd		=	true,
-	veerle.geboorteDatum	=	new Date(1964,5,11);
+	/*+++++++++++++++++ OBJECTEN ++++++++++++++++++++*/
 
 	/*+++++++++++++++++ CONSTRUCTORS ++++++++++++++++++++*/
 	/**** Persoon Class ****/
@@ -94,71 +64,65 @@ table {
 		return this.replace(/^\s*(\S*(\s+\S+)*)\s*$/, "$1");
 	};
 
+	/**** cursist class ****/
+	function Cursist(naam, leeftijd, geslacht, aOpl, oTutor) {
+		Persoon.call(this, naam, leeftijd, geslacht);
+		this.opleidingen	=	aOpl;
+		this.tutor			=	oTutor;
+	}
+	Cursist.prototype		=	new Persoon();
+	Cursist.prototype.opleider	=	'vdab';
+	Cursist.prototype.voegOpleidingToe	=	function(opleiding) {
+		this.opleidingen.push(opleiding);
+	}
+	Cursist.prototype.spreek	=	function() {
+		var sOpl	=	"\n ik volg de opleidingen ";
+		for(var i=0; i<this.opleidingen.length; i++) {
+			sOpl	+=	this.opleidingen[i] + ", ";
+		}
+		sOpl	+=	"\n mijn tutor is " + this.tutor;
+		console.log(this.info() + sOpl);
+	};
+
+	/**** instructeur class ****/
+	function Instructeur(sNaam, nLeeftijd, sGeslacht, sVak, nStartJaar) {
+		// call superclass constructor
+		Persoon.call(this, sNaam, nLeeftijd, sGeslacht);
+
+		var dNu		=	new Date();
+		var nHuidigJaar	=	dNu.getFullYear();
+
+		this.vak	=	sVak;
+		this.ancienniteit	=	nHuidigJaar - nStartJaar;
+		this.salaris	=	this.basiswedde * this.ancienniteit/10;
+	}
+
+	Instructeur.prototype	=	new Persoon();
+	Instructeur.prototype.basiswedde	=	1600;
+	Instructeur.prototype.verhoogAncienniteit	=	function(jaar) {
+		this.ancienniteit	=	this.ancienniteit + jaar;
+	}
+	Instructeur.prototype.spreek	=	function() {
+		var sInfo	=	",\n ik ben instructeur " + this.vak;
+		sInfo		+=	",\n ik werk reeds " + this.ancienniteit + " jaar voor de vdab";
+		sInfo		+=	",\n mijn salaris is " + this.salaris + "euro";
+		console.log(this.info() + sInfo);
+	};
 
 	// instanties
-	var kurt	=	new Persoon("Kurt", 49, "m");
-	var ann		=	new Persoon("Ann", 51, "v");
-	var inge	=	new ann.constructor('inge', 33, "v");
-
-	// wijzigingen
-	ann.moederTaal	=	"Frans";
-	kurt.leeftijd	=	99;
-
-	paul.functie	=	"webontwikkelaar";
-	kurt.hobbies	=	["fietsen", "reizen"];
-	kurt.kinderen	=	[];
-	kurt.kinderen[0]	=	new Persoon("Candide", 21, "v");
-
-
-	// methods
-	kurt.spreek();
-	ann.spreek();
-	inge.spreek();
-	console.log(ann);
-	console.log(kurt);
+	var benny	=	new Cursist("Benny", 28, "m",["acces", "excel"], "Jan");
+	var jean	=	new Instructeur("Jean", 58, "m", "Cobol", 1995);
 
 
 	/*+++++++++++++++++ UITVOEREN ++++++++++++++++++++*/
+	benny.spreek();
+	jean.spreek();
+	eOutput.innerHTML	=	enumerateHTML(benny);
 
-//	console.log(enumerate(paul));
-//	console.log(ann);
 
-	var jsonPaul	=	JSON.stringify(paul);
-//	console.log(jsonPaul);
-	var jsonVeerle	=	JSON.stringify(veerle);
-//	console.log(jsonVeerle);
-
-//	console.log("ann " + ann.constructor);
-//	console.log("paul " + paul.constructor);
-//
-//	console.log(inge);
-//	console.log(inge instanceof Persoon);	// returnt true
-
-	eOutput.innerHTML	=	enumerateHTML(kurt) + enumerateHTML(ann) + enumerateHTML(inge);
-
-	var tekst	=	"              tekst             ";
-	console.log(tekst);
-	tekst		=	tekst.trim();
-	console.log(tekst);
 
 
 	/*+++++++++++++++++ FUNCTIES ++++++++++++++++++++*/
-	function enumerate(obj) {
-		// Overloop alle eigenschappen van een object
-		// return string
-
-		var strProps	=	"";
-
-		for (var key in obj) {
-			if(typeof obj[key] === "object") {
-				strProps	+=	enumerate(obj[key]);
-			} else {
-				strProps	+=	key + "(" + typeof obj[key] + "): " + obj[key] + "\n";
-			}
-		}
-		return strProps;
-	}
-
 	function enumerateHTML(obj) {
 		// Overloop alle eigenschappen van een object
 		// return string voor innerHTML

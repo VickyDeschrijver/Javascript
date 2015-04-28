@@ -98,3 +98,8 @@ function clearCookie(naam) {
      */
     setCookie(naam, "", -1);
 }
+
+/************************methods*******************************************/
+String.prototype.trim =   function() {
+    return this.replace(/^\s*(\S*(\s+\S+)*)\s*$/, "$1");
+};
