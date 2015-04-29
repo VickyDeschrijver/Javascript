@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
 <title>JS advanced project: Personeel</title>
+
 <style type="text/css">
 #output {
 	background-color:#CFC;
@@ -23,6 +25,8 @@ table {
 }
 </style>
 
+	<script type="text/javascript" src="../frameworks/jquery-1.11.2.min.js"></script>
+
 
 </head>
 <body>
@@ -37,6 +41,7 @@ table {
 
 	//================= DOM ==============
 	var eOutput	=	document.querySelector('#output');
+
 
 
 	/*+++++++++++++++++ OBJECTEN ++++++++++++++++++++*/
@@ -66,6 +71,7 @@ table {
 
 	/**** cursist class ****/
 	function Cursist(naam, leeftijd, geslacht, aOpl, oTutor) {
+		// call superclass constructor
 		Persoon.call(this, naam, leeftijd, geslacht);
 		this.opleidingen	=	aOpl;
 		this.tutor			=	oTutor;
@@ -106,23 +112,147 @@ table {
 		var sInfo	=	",\n ik ben instructeur " + this.vak;
 		sInfo		+=	",\n ik werk reeds " + this.ancienniteit + " jaar voor de vdab";
 		sInfo		+=	",\n mijn salaris is " + this.salaris + "euro";
-		console.log(this.info() + sInfo);
+//		console.log(this.info() + sInfo);
 	};
 
 	// instanties
 	var benny	=	new Cursist("Benny", 28, "m",["acces", "excel"], "Jan");
 	var jean	=	new Instructeur("Jean", 58, "m", "Cobol", 1995);
 
+	// create object
+	var auto 	=	{
+		merk:		"Merk",
+		type:		"type",
+		kleur:		"neutraal",
+		aandrijving: 2,
+		toString:	function() {
+			var sInfo	=	"ik ben een auto, merk " + this.merk + ", type: " + this.type;
+			sInfo		+=	", \n" + this.aandrijving + "-wiels aandrijving";
+			sInfo		+=	", \nkleur " + this.kleur;
+			return sInfo
+		}
+	}
+//	console.log(auto.toString());
+
+	var toyota		=	Object.create(auto);
+	toyota.merk		=	"Toyota";
+	toyota.kleur	=	"Blauw";
+	toyota.type		=	"Verso";
+//	console.log(toyota.toString());
+
+	var kia		=	Object.create(toyota);
+	kia.merk	=	"Kia";
+	kia.kleur	=	"grijs";
+	kia.type	=	"Sorento";
+//	console.log(kia.toString());
+
+	var ferrari	=	Object.create(auto, {
+		merk:		{value: "Ferrari", enumerable: true},			// property description, op deze wijze kan in dit geval merknaam private en dus onwijzigbaar zijn
+		cylinders:	{enumerable: true, writable: true, value: 8},
+		_color:		{value: undefined, writable: true},				// accessor description (get & set) != om value te gebruiken
+		kleur:		{
+			get:	function() {
+				return this.merk + " " + this._color
+			},
+			set:	function(kleur) {
+				if(kleur == 'rood' || kleur == 'geel') {this._color = kleur}
+				else {throw new Error('geen aanvaardbare kleur')}
+			}
+		}
+	});
+
+	ferrari.type	=	"berlinetta";
+	ferrari.aandrijving	=	4;
+	ferrari.cylinders	=	12;
+	//	ferrari.kleur	=	'groen';		// werpt foutmelding
+	ferrari.kleur	=	'geel';
+//	console.log(ferrari.toString());
+//	console.log(enumerate(ferrari));
+//	console.log(ferrari.cylinders);
+
+	Object.defineProperty(ferrari, "prijs", {value: 275000, enumerable:true})	// toevoegen
+	Object.defineProperty(ferrari, "aandrijving", {writable:false})				// wijzigen
+	//	ferrari.aandrijving	=	6;			// werpt nu foutmelding na wijziging hierboven
+
+//	console.log(ferrari.toString());
+//	console.log(enumerate(ferrari));
+
+	// Extend jQuery
+	var oDefaults	=	{
+		type:			"driehoek",
+		aantalHoeken:	3,
+		kleuren:		["blue", "red", "yellow"],
+		pos:			{x:0, y:0, z:0}
+	};
+	var oSettings	=	{
+		kleuren:		["green", "black"],
+		pos:			{x:100, y:50},
+		auteur:			"jan"
+	};
+
+	/* merge oSettings in oDefault */
+	$.extend(true, oDefaults, oSettings);
+	console.log(JSON.stringify(oDefaults));
+
+	var honda	= 	$.extend({}, auto);
+	honda.merk	=	"Honda";
+	console.log(JSON.stringify(honda));
+
+	var instellingen	= $.extend(true, {}, oDefaults, oSettings);
+	console.log(JSON.stringify(instellingen));
+
+	/**** class constructor voert init method uit ****/
+	var Class	=	function() {
+		var klas	=	function() {
+			this.init.apply(this, arguments);
+		}
+		klas.prototype.init	=	function() {};
+		// shortcut nr prototype
+		klas.fn	=	klas.prototype;
+		// shortcut naar class zelf
+		klas.fn.parent	=	klas;
+		return klas;
+	}
+
+	var Planeet	=	new Class();
+	Planeet.fn.init 	=	function(name, massa, diameter) {
+		var me		=	this;
+		this.name	=	name;
+		this.massa	=	massa;			// Earth masses 1ME = 5.9736 x 10^24kg
+		this.diameter	=	diameter	// km
+		this.volume	=	function() {
+			return ((Math.PI/6) * Math.pow(me.diameter, 3));
+		} ()
+	}
+	var pluto	=	new Planeet('Pluto', 0.0021, 2390);
+	console.log(enumerate(pluto));
+	console.log(pluto.volume);
 
 	/*+++++++++++++++++ UITVOEREN ++++++++++++++++++++*/
-	benny.spreek();
-	jean.spreek();
-	eOutput.innerHTML	=	enumerateHTML(benny);
+//	benny.spreek();
+//	jean.spreek();
+	eOutput.innerHTML	=	enumerateHTML(auto) + enumerateHTML(toyota) + enumerateHTML(kia) + enumerateHTML(ferrari);
 
 
 
 
 	/*+++++++++++++++++ FUNCTIES ++++++++++++++++++++*/
+	function enumerate(obj) {
+		// Overloop alle eigenschappen van een object
+		// return string
+
+		var strProps	=	"";
+
+		for (var key in obj) {
+			if(typeof obj[key] === "object") {
+				strProps	+=	enumerate(obj[key]);
+			} else {
+				strProps	+=	key + "(" + typeof obj[key] + "): " + obj[key] + "\n";
+			}
+		}
+		return strProps;
+	}
+
 	function enumerateHTML(obj) {
 		// Overloop alle eigenschappen van een object
 		// return string voor innerHTML

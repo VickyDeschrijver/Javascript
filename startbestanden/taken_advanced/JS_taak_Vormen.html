@@ -26,6 +26,9 @@ h3 {
 }
 -->
 </style>
+
+  <script type="text/javascript" src="../frameworks/jquery-1.11.2.min.js"></script>
+
 </head>
 
 <body>
@@ -67,5 +70,139 @@ h3 {
     <i>&quot;,  ik heb [aantaHoeken] hoeken  , een oppervlakte van [oppervlakte] en een omtrek van [omtrek]&quot;</i>. </li>
 </ul>
 <div id="output"></div>
+
+<script>
+  'use strict';
+
+  //================= DOM ==============
+  var eOutput	=	document.querySelector('#output');
+
+  /*+++++++++++++++++ OBJECTEN ++++++++++++++++++++*/
+  var testFiguur  = new Vorm("wiebelwobbel", "vierkant", "");
+  var testRondje  = new Cirkel("rondje", "cirkel", "dit gaat helemaal rond", 5)
+  testFiguur.hoeken = 8;
+
+
+  var figuur   = {
+    naam:     "neutraal",
+    type:     "vorm",
+    tekst:    function() {
+      var sInfo = "Hallo, ik ben " + this.naam + ", ik ben een " + this.type;
+      return sInfo;
+    }
+  };
+  console.log(figuur.tekst());
+
+  var rondje  = Object.create(figuur, {
+    naam:     "rondje",
+    type:     "cirkel",
+    straal:   15
+  });
+  console.log(rondje.tekst());
+
+
+
+
+  /*+++++++++++++++++ CONSTRUCTORS ++++++++++++++++++++*/
+  /**** Vorm Class ****/
+  function Vorm(sNaam, sType, sTekst) {
+    this.naam   = sNaam;
+    this.type   = sType;
+    this.tekst  = sTekst;
+  }
+
+  // augmentation
+
+
+
+   /**** Cirkel class ****/
+  // afgeleid van Vorm
+  function Cirkel(naam, type, tekst, nStraal) {
+    Vorm.call(this, naam, type, tekst);
+    this.straal = nStraal;
+  }
+
+
+  /**** Veelhoek class ****/
+  // afgeleid van Vorm
+  function Veelhoek(naam, type, tekst, nHoeken) {
+    Vorm.call(this, naam, type, tekst);
+    this.hoeken = nHoeken;
+  }
+
+  Veelhoek.prototype  = new Vorm();
+
+  // Methods
+  testFiguur.schrijf();
+  testRondje.schrijf();
+  console.log(testFiguur.hoeken);
+
+
+
+
+
+  /*+++++++++++++++++ UITVOEREN ++++++++++++++++++++*/
+  eOutput.innerHTML	=	enumerateHTML(testFiguur) + enumerateHTML(testRondje);
+
+
+
+  /*+++++++++++++++++ FUNCTIES ++++++++++++++++++++*/
+  function spreek() {
+    console.log('spreek');
+  }
+
+  function schrijf() {
+    console.log('schrijf');
+  }
+
+  function oppervlakteBerekenen() {
+    console.log('oppervlakteBerekenen');
+  }
+
+  function omtrekBerekenen() {
+    console.log('omtrekBerekenen');
+  }
+
+
+  function enumerate(obj) {
+    // Overloop alle eigenschappen van een object
+    // return string
+
+    var strProps	=	"";
+
+    for (var key in obj) {
+      if(typeof obj[key] === "object") {
+        strProps	+=	enumerate(obj[key]);
+      } else {
+        strProps	+=	key + "(" + typeof obj[key] + "): " + obj[key] + "\n";
+      }
+    }
+    return strProps;
+  }
+
+  function enumerateHTML(obj) {
+    // Overloop alle eigenschappen van een object
+    // return string voor innerHTML
+
+    var strProps	=	"<ul>";
+
+    for (var key in obj) {
+      if(typeof obj[key] === "object") {
+        strProps	+=	"<li>";
+        strProps	+=	key;
+        strProps	+=	enumerateHTML(obj[key]);
+        strProps	+=	"</li>";
+      } else {
+        strProps	+=	"<li>" + key + "(" + typeof obj[key] + "): " + obj[key] + "</li>\n";
+      }
+    }
+    strProps	+=	"</ul>\n";
+    return strProps;
+  }
+
+
+</script>
+
+
 </body>
 </html>

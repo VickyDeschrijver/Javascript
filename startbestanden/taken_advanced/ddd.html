@@ -1,0 +1,153 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>JS advanced taak: Vormen</title>
+    <script type="text/javascript" src="merosilib.js"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            var test = new Vierkant("piet", 10);
+            test.spreek();
+            alert("omtrek: " + test.omtrek());
+            alert("oppervlakte: " + test.oppervlakte());
+            test.schrijf();
+
+            var test = new Vierhoek("piet", 10, 50);
+            test.spreek();
+            alert("omtrek: " + test.omtrek());
+            alert("oppervlakte: " + test.oppervlakte());
+            test.schrijf();
+
+            var test = new Veelhoek("piet", 10);
+            test.spreek();
+            test.schrijf();
+
+            var test = new Cirkel("piet", 10);
+            test.spreek();
+            alert("omtrek: " + test.omtrek());
+            alert("oppervlakte: " + test.oppervlakte());
+            test.schrijf();
+
+            var test = new Vorm("piet");
+            test.spreek();
+            test.schrijf();
+
+            var test = new Driehoek("piet", [1, 1, 1]);
+            test.spreek();
+            alert("omtrek: " + test.omtrek());
+            alert("oppervlakte: " + test.oppervlakte());
+            test.schrijf();
+        }
+
+        /***************** CONSTRUCTORS *****************/
+        /********************* VORM *********************/
+        function Vorm(naam){
+            this.naam 	= naam;
+        }
+        Vorm.prototype.type 	= "Vorm";
+        Vorm.prototype.info 	= function(){
+            return "Hallo, ik ben " + this.naam + ", ik ben een " + this.type;
+        }
+        Vorm.prototype.spreek 	= function(){
+            alert(
+                    this.info()
+            );
+        }
+        Vorm.prototype.schrijf = function(){
+            eOutput = document.getElementById("output");
+            eOutput.innerHTML = enumerateToUL(this);
+        }
+        /******************* CIRKEL *******************/
+        function Cirkel(naam, straal){
+            Vorm.call(this, naam);
+            this.straal = straal;
+        }
+        extend(Cirkel, Vorm);
+
+        Cirkel.prototype.type 			= "Cirkel";
+        Cirkel.prototype.spreek 		= function(){
+            alert(
+                    this.info() + ", ik heb een straal van " + this.straal
+            );
+        }
+        Cirkel.prototype.omtrek 		= function(){
+            return 2*Math.PI*this.straal;
+        }
+        Cirkel.prototype.oppervlakte 	= function(){
+            return Math.PI * Math.pow(this.straal, 2);
+        }
+        /****************** VEELHOEK ******************/
+        function Veelhoek(naam, aantalHoeken){
+            Vorm.call(this, naam);
+            this.aantalHoeken = aantalHoeken;
+
+        }
+        extend(Veelhoek, Vorm);
+
+        Veelhoek.prototype.type = "Veelhoek";
+        Veelhoek.prototype.spreek = function(){
+            alert(
+                    this.info() + ", ik heb " + this.aantalHoeken + " hoeken"
+            );
+        }
+        /****************** DRIEHOEK ******************/
+        function Driehoek(naam, zijden)
+        {
+            Veelhoek.call(this, naam, 3);
+            this.zijden = zijden;
+        }
+        extend(Driehoek, Veelhoek);
+
+        Driehoek.prototype.type = "Driehoek";
+        Driehoek.prototype.omtrek = function(){
+            var omtrekSom = 0;
+            for(var i = 0; i < this.zijden.length; i++){
+                omtrekSom += this.zijden[i];
+            }
+            return omtrekSom
+        }
+        Driehoek.prototype.oppervlakte = function(){
+            var s = this.omtrek();
+            var a = this.zijden[0];
+            var b = this.zijden[1];
+            var c = this.zijden[2];
+
+            var kwadraat = s* (s-a) * (s-b) * (s-c);
+
+            return Math.sqrt(kwadraat);
+        }
+        /****************** VIERHOEK ******************/
+        function Vierhoek(naam, lengte, breedte)
+        {
+            Veelhoek.call(this, naam, 4);
+
+            this.lengte = lengte;
+            this.breedte = breedte;
+        }
+        extend(Vierhoek, Veelhoek);
+
+        Vierhoek.prototype.type = "Vierhoek";
+        Vierhoek.prototype.omtrek = function(){
+            return (this.lengte * 2 + this.breedte * 2)
+        }
+        Vierhoek.prototype.oppervlakte = function(){
+            return this.lengte * this.breedte;
+        }
+        /****************** VIERKANT ******************/
+        function Vierkant(naam, zijde)
+        {
+            Vierhoek.call(this, naam, zijde, zijde);
+
+            this.zijde = zijde;
+            //this.type = "Vierkant";
+        }
+        extend(Vierkant, Vierhoek);
+
+        Vierkant.prototype.type = "Vierkant";
+        Vierkant.prototype.omtrek = function(){
+            return this.zijde*4;
+        }
+        Vierkant.prototype.oppervlakte = function(){
+            return this.zijde*this.zijde;
+        }
+
+    </script>
