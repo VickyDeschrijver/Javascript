@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>JS advanced project: Personeel</title>
+<style type="text/css">
+#output {
+	background-color:#CFC;
+	padding:1em;
+}
+td, th {
+	border:1px solid gray;
+	padding: 0.2em 1em;
+}
+tbody {
+	border:2px dashed #0CF;
+}
+table {
+	border:2px solid #900;
+	table-layout:auto;
+ 	border-collapse:collapse;
+	margin: 1em;
+}
+</style>
+
+
+</head>
+<body>
+<h1>JS advanced project: Personeel</h1>
+<p>Objecten in Javascript</p>
+
+
+<div id="output"></div>
+
+<script type="text/javascript" src="../frameworks/jquery-1.11.2.min.js"></script>
+<script>
+	'use strict';
+
+	// ================ DOM ==================
+	var eOutput	=	document.querySelector('#output');
+
+
+	// +++++++++++++++ OBJECTEN +++++++++++++++++++++
+	// literal
+	var paul	=	{
+		naam:		"Paul",
+		geslacht:	"m",
+		leeftijd:	50,
+		geboorteDatum:	new Date(1960,9,12),
+		hobbies:	["tennis", "zwemmen", "videogames"],
+		gehuwd:		true,
+		kinderen:	[
+			{	naam:		"Anthony",
+				gewicht:	36,
+				gehuwd:		false,
+				geboorteDatum:	new Date(1999,1,31)
+			},
+			{	naam:		"Leen",
+				gewicht:	65,
+				gehuwd:		false,
+				geboorteDatum:	new Date(1989,11,7)
+
+			}
+		],
+		spreek:		function(){
+			alert("hallo, " + this.naam + " hier, ik heb " + this.kinderen.length + " kinderen");
+		}
+	};
+
+	// met constructor
+	var veerle	=	new Object();
+	veerle.naam	=	"Veerle";
+	veerle.geslacht	=	"v";
+	veerle.gehuwd	=	true;
+	veerle.geboorteDatum	=	new Date(1964,5,11);
+
+
+	var auto	=	{
+		merk:		"merk",
+		type:		"type",
+		kleur:		"neutraal",
+		aandrijving:	2,
+		toString:	function() {
+			var sInfo	=	"Ik ben een auto, merk " + this.merk + ", type: " + this.type;
+			sInfo		+=	", \n" + this.aandrijving + "-wiels aandrijving";
+			sInfo		+=	", \nkleur " + this.kleur;
+			return sInfo;
+		}
+	}
+//	console.log(auto.toString());
+
+	var toyota		=	Object.create(auto);
+	toyota.merk		=	"Toyota";
+	toyota.kleur	=	"blauw";
+	toyota.type		=	"Verso";
+//	console.log(toyota.toString());
+
+	var kia			=	Object.create(toyota);
+	kia.merk		=	"Kia";
+	kia.kleur		=	"grijs";
+	kia.type		=	"Sorento";
+//	console.log(kia.toString());
+
+	var ferrari		=	Object.create(auto, {
+		merk:		{value:"Ferrari", enumerable:true},
+		cylinders:	{enumerable:true, writable:true, value:8},
+		_color:		{value:undefined, writable:true},
+		kleur:		{
+			get:	function() {
+				return this.merk + " " + this._color
+			},
+			set:	function(kleur) {
+				if(kleur == 'rood' || kleur == 'geel') {this._color = kleur}
+				else {throw new Error ('geen aanvaardbare kleur')}
+			}
+		}
+	});
+//	ferrari.merk	=	"Ferrari";
+	ferrari.type	=	"Berlinetta";
+	ferrari.aandrijving	=	4;
+	ferrari.cylinders	=	12;
+//	ferrari.kleur	=	"groen";
+	ferrari.kleur	=	"geel";
+
+	Object.defineProperty(ferrari, "prijs", {value:275000, enumerable:true})	// toevoegen
+	Object.defineProperty(ferrari, "aandrijving", {writable:false})				// wijzigen
+//	ferrari.aandrijving	=	6;
+
+//	console.log(ferrari.toString());
+//	console.log(enumerate(ferrari));
+//	console.log(ferrari.cylinders);
+
+
+	var oDefaults	=	{
+		type:			"driehoek",
+		aantalHoeken:	3,
+		kleuren:		["blue", "red", "yellow"],
+		pos:			{x:0, y:0, z:0}
+	};
+	var oSettings	=	{
+		kleuren:		["green", "black"],
+		pos:			{x:100, y:50},
+		auteur:			"jan"
+	};
+
+	/* merge oSettings in oDefaults */
+	$.extend(true, oDefaults, oSettings);
+	console.log(JSON.stringify(oDefaults));
+
+	var honda	= $.extend({}, auto);
+	honda.merk	=	"Honda";
+	console.log(JSON.stringify(honda));
+
+	var instellingen	= $.extend(true, {}, oDefaults, oSettings);
+	console.log(JSON.stringify(instellingen));
+
+	// ++++++++++++++++ CONSTRUCTORS +++++++++++++++
+	/**** Class constructor ****/
+	// voert init method uit
+	var Class	=	function() {
+		var klas	=	function() {
+			this.init.apply(this, arguments);
+		}
+		klas.prototype.init	=	function() {};
+		// shortcut naar prototype
+		klas.fn		=	klas.prototype;
+		// shortcut naar class zelf
+		klas.fn.parent	=	klas;
+		return klas;
+	}
+
+	var Planeet	=	new Class();
+	Planeet.fn.init	=	function(name, massa, diameter) {
+		var me		=	this;
+		this.name	=	name;
+		this.massa	=	massa;	// earth masses 1ME = 5.9736 * 10^24kg
+		this.diameter	=	diameter;	// km
+		this.volume	=	function() {
+			return ((Math.PI/6) * Math.pow(me.diameter, 3));
+		} ()
+	}
+	var pluto	=	new Planeet("Pluto", 0.0021, 2390);
+	console.log(enumerate(pluto));
+	console.log(pluto.volume);
+
+	/**** Persoon Class ****/
+	function Persoon(sNaam, nLeeftijd, sGeslacht) {
+		this.naam		=	sNaam;
+		this.leeftijd	=	nLeeftijd;
+		this.geslacht	=	sGeslacht;
+//		this.info		=	"ik ben " + this.naam + ", " + this.leeftijd + " jaar, \n mijn moedertaal is " + this.moederTaal;
+	}
+
+	// Augmentation
+	Persoon.prototype.gehuwd	=	false;
+	Persoon.prototype.moederTaal	=	"Nederlands";
+	Persoon.prototype.info	=	function() {
+		return "ik ben " + this.naam + ", " + this.leeftijd + " jaar, \n mijn moedertaal is " + this.moederTaal;
+	};
+	Persoon.prototype.spreek	=	function() {
+		console.log(this.info());
+	};
+
+	String.prototype.trim =   function() {
+		return this.replace(/^\s*(\S*(\s+\S+)*)\s*$/, "$1");
+	};
+
+	// instanties
+
+
+	// methods
+
+	/**** Cursist Class ****/
+	function Cursist(naam, leeftijd, geslacht, aOpl, oTutor) {
+		Persoon.call(this, naam, leeftijd, geslacht);
+		this.opleidingen	=	aOpl;
+		this.tutor			=	oTutor;
+	}
+	Cursist.prototype	=	new Persoon();
+	Cursist.prototype.opleider	=	"vdab";
+	Cursist.prototype.voegOpleidingToe	=	function(opleiding) {
+		this.opleidingen.push(opleiding);
+	}
+	Cursist.prototype.spreek	=	function() {
+		var sOpl	=	"\n Ik volg de opleidingen ";
+		for(var i=0; i<this.opleidingen.length; i++) {
+			sOpl	+=	this.opleidingen[i] + ",";
+		}
+		sOpl	+=	" mijn tutor is " + this.tutor;
+//		console.log(this.info() + sOpl)
+	};
+
+	// instanties
+	var benny	=	new Cursist("Benny", 28, "m", ["acces", "excel"], "Jan");
+
+	/**** Instructeur Class ****/
+	function Instructeur(sNaam, nLeeftijd, sGeslacht, sVak, nStartJaar) {
+		// call superclass constructor
+		Persoon.call(this, sNaam, nLeeftijd, sGeslacht);
+
+		var dNu	=	new Date();
+		var nHuidigJaar	=	dNu.getFullYear();
+
+		this.vak			=	sVak;
+		this.ancienniteit	=	nHuidigJaar - nStartJaar;
+		this.salaris		=	this.basiswedde * this.ancienniteit/10;
+	}
+
+	Instructeur.prototype	=	new Persoon();
+	Instructeur.prototype.basiswedde			=	1600;
+	Instructeur.prototype.verhoogAncienniteit	=	function(jaar) {
+		this.ancienniteit	=	this.ancienniteit + jaar;
+	}
+	Instructeur.prototype.spreek	=	function() {
+		var sInfo	=	",\n ik ben instructeur " + this.vak;
+		sInfo		+=	",\n ik werk reeds " + this.ancienniteit + " jaar voor de vdab";
+		sInfo		+=	",\n mijn salaris is " + this.salaris + "euro";
+//		console.log(this.info() + sInfo);
+	};
+
+	// instanties
+	var jean	=	new Instructeur("Jean", 58, "m", "Cobol", 1995);
+
+//	var jan		=	Object.create(null);
+//	jan.naam	=	"Jan";
+
+
+
+
+
+
+
+	// ++++++++++++++++ UITVOEREN +++++++++++++++++
+	benny.spreek();
+	jean.spreek();
+	eOutput.innerHTML	=	enumerateHTML(oDefaults);
+
+
+
+	// ++++++++++++++++ FUNCTIES ++++++++++++++++++++
+	function enumerate(obj) {
+		// Overloop alle eigenschappen van een object
+		// return string
+		var strProps	=	"";
+		for(var key in obj) {
+			if(typeof obj[key] === "object") {
+				strProps	+=	enumerate(obj[key]);
+			}
+			else {
+				strProps	+=	key + "(" + typeof obj[key] + "): " + obj[key] + "\n";
+			}
+		}
+		return strProps;
+	}
+
+	function enumerateHTML(obj) {
+		// Overloop alle eigenschappen van een object
+		// return string voor innerHTML
+
+		var strProps	=	"<ul>";
+		for(var key in obj) {
+			if(typeof obj[key] === 'object') {
+				strProps	+=	"<li>";
+				strProps	+=	key;
+				strProps	+=	enumerateHTML(obj[key]);
+				strProps	+=	"</li>";
+			}
+			else {
+				strProps	+=	"<li>" + key + "(" + typeof obj[key] + "): " + obj[key] + "</li>\n";
+			}
+		}
+		strProps	+=	"</ul>\n"
+		return strProps;
+	}
+
+
+
+</script>
+</body>
+</html>

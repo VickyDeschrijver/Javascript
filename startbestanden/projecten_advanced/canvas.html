@@ -43,6 +43,37 @@ span.tag {
 -->
 </style>
 <script type="text/javascript">
+	window.onload	=	function() {
+		var canvas	=	document.getElementById('canvas');
+		rechthoeken(canvas);
+		driehoek(canvas);
+	}
+
+	function rechthoeken(c) {
+		var ctx	= c.getContext('2d');
+		if(ctx) {
+			ctx.fillStyle	=	"yellow";
+			ctx.strokeStyle	=	"#000";
+			ctx.fillRect(50, 50, 200, 70);		// x, y, breedte, hoogte
+			ctx.strokeRect(80, 80, 200, 70);
+			ctx.clearRect(100, 20, 50, 160);
+		}
+	}
+
+	function driehoek(c) {
+		var ctx	= c.getContext('2d');
+		ctx.strokeStyle	=	"rgb(200,0,0)";
+		ctx.fillStyle	=	"white";
+
+		ctx.beginPath();
+		ctx.moveTo(400, 100);
+		ctx.lineTo(300, 250);
+		ctx.lineTo(300, 250);
+		ctx.closePath();
+		ctx.fill();
+		ctx.stroke();
+
+	}
 
 </script>
 </head>

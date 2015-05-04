@@ -71,98 +71,175 @@ h3 {
 </ul>
 <div id="output"></div>
 
+
 <script>
   'use strict';
 
   //================= DOM ==============
   var eOutput	=	document.querySelector('#output');
 
-  /*+++++++++++++++++ OBJECTEN ++++++++++++++++++++*/
-  var testFiguur  = new Vorm("wiebelwobbel", "vierkant", "");
-  var testRondje  = new Cirkel("rondje", "cirkel", "dit gaat helemaal rond", 5)
-  testFiguur.hoeken = 8;
-
-
-  var figuur   = {
-    naam:     "neutraal",
-    type:     "vorm",
-    tekst:    function() {
-      var sInfo = "Hallo, ik ben " + this.naam + ", ik ben een " + this.type;
-      return sInfo;
-    }
-  };
-  console.log(figuur.tekst());
-
-  var rondje  = Object.create(figuur, {
-    naam:     "rondje",
-    type:     "cirkel",
-    straal:   15
-  });
-  console.log(rondje.tekst());
-
-
-
 
   /*+++++++++++++++++ CONSTRUCTORS ++++++++++++++++++++*/
   /**** Vorm Class ****/
-  function Vorm(sNaam, sType, sTekst) {
+  function Vorm(sNaam) {
     this.naam   = sNaam;
-    this.type   = sType;
-    this.tekst  = sTekst;
   }
 
-  // augmentation
-
-
+  Vorm.prototype.type   = "vorm";
+  Vorm.prototype.tekst  = function() {
+    return "Hallo, ik ben " + this.naam + ", ik ben een " + this.type;
+  }
+  Vorm.prototype.spreek = function() {
+    console.log(this.tekst());
+  }
+  Vorm.prototype.schrijf  = function() {
+    eOutput.innerHTML = enumerateHTML(this);
+  }
 
    /**** Cirkel class ****/
   // afgeleid van Vorm
-  function Cirkel(naam, type, tekst, nStraal) {
-    Vorm.call(this, naam, type, tekst);
+  function Cirkel(naam, nStraal) {
+    Vorm.call(this, naam);
     this.straal = nStraal;
+  }
+
+  Cirkel.prototype        = new Vorm();
+  Cirkel.prototype.type   = "cirkel";
+  Cirkel.prototype.spreek = function() {
+    console.log(this.tekst() + ".\nIk heb een straal van " + this.straal + "cm, een oppervlakte van " + this.oppervlakte() + "cm² en een omtrek van " + this.omtrek() + "cm.");
+  }
+  Cirkel.prototype.schrijf  = function() {
+    eOutput.innerHTML +=  enumerateHTML(this);
+  }
+  Cirkel.prototype.omtrek = function() {
+    return ((2*this.straal) * Math.PI).toFixed(2);
+  }
+  Cirkel.prototype.oppervlakte  = function() {
+    return (Math.PI * Math.pow(this.straal, 2)).toFixed(2);
   }
 
 
   /**** Veelhoek class ****/
   // afgeleid van Vorm
-  function Veelhoek(naam, type, tekst, nHoeken) {
-    Vorm.call(this, naam, type, tekst);
+  function Veelhoek(naam, nHoeken) {
+    Vorm.call(this, naam);
     this.hoeken = nHoeken;
   }
 
-  Veelhoek.prototype  = new Vorm();
+  Veelhoek.prototype        = new Vorm();
+  Veelhoek.prototype.type   = "veelhoek";
+  Veelhoek.prototype.spreek = function() {
+    console.log(this.tekst() + ".\nIk heb " + this.hoeken + " hoeken.");
+  }
+  Veelhoek.prototype.schrijf  = function() {
+    eOutput.innerHTML +=  enumerateHTML(this);
+  }
 
-  // Methods
-  testFiguur.schrijf();
-  testRondje.schrijf();
-  console.log(testFiguur.hoeken);
+
+  /**** Driehoek class ****/
+  // afgeleid van Veelhoek
+  function Driehoek(naam, aZijden) {
+    Veelhoek.call(this, naam, 3);
+    this.zijden = aZijden;
+  }
+  Driehoek.prototype        = new Veelhoek();
+  Driehoek.prototype.type   = "driehoek";
+  Driehoek.prototype.omtrek = function() {
+    var omtrekSom = 0;
+    for(var i = 0; i < this.zijden.length; i++){
+      omtrekSom += this.zijden[i];
+    }
+    return (omtrekSom).toFixed(2);
+  }
+  Driehoek.prototype.oppervlakte  = function() {
+    var s = this.omtrek();
+    var a = this.zijden[0];
+    var b = this.zijden[1];
+    var c = this.zijden[2];
+
+    var kwadraat = s* (s-a) * (s-b) * (s-c);
+
+    return (Math.sqrt(kwadraat)).toFixed(2);
+  }
+  Driehoek.prototype.spreek = function() {
+    console.log(this.tekst() + ".\nIk heb " + this.hoeken + " hoeken, een oppervlakte van " + this.oppervlakte() + "cm² en een omtrek van " + this.omtrek() + "cm.");
+  }
+  Driehoek.prototype.schrijf  = function() {
+    eOutput.innerHTML +=  enumerateHTML(this);
+  }
 
 
+  /**** Vierhoek class ****/
+  // afgeleid van Veelhoek
+  function Vierhoek(naam, nLengte, nBreedte) {
+    Veelhoek.call(this, naam, 4);
+    this.lengte   = nLengte;
+    this.breedte  = nBreedte;
+  }
 
+  Vierhoek.prototype        = new Veelhoek();
+  Vierhoek.prototype.type   = "vierhoek";
+  Vierhoek.prototype.omtrek = function() {
+    return (2*(this.lengte + this.breedte)).toFixed(2);
+  }
+  Vierhoek.prototype.oppervlakte  = function() {
+    return (this.lengte * this.breedte).toFixed(2);
+  }
+  Vierhoek.prototype.spreek = function() {
+    console.log(this.tekst() + ".\nIk heb " + this.hoeken + " hoeken, een oppervlakte van " + this.oppervlakte() + "cm² en een omtrek van " + this.omtrek() + "cm.");
+  }
+  Vierhoek.prototype.schrijf  = function() {
+    eOutput.innerHTML +=  enumerateHTML(this);
+  }
+
+  /**** Vierkant class ****/
+  // afgeleid van Vierhoek
+  function Vierkant(naam, nZijden) {
+    Veelhoek.call(this, naam, 4);
+    this.zijden   = nZijden;
+  }
+
+  Vierkant.prototype        = new Vierhoek();
+  Vierkant.prototype.type   = "vierkant";
+  Vierkant.prototype.omtrek = function() {
+    return (4*this.zijden).toFixed(2);
+  }
+  Vierhoek.prototype.oppervlakte  = function() {
+    return (this.zijden * this.zijden).toFixed(2);
+  }
+
+
+  // instanties
+  var vormpie = new Vorm("Vormpie");
+  var rondje = new Cirkel("Rondje", 5);
+  var hoeksken = new Veelhoek("Hoekske", 4);
+  var drieke = new Driehoek("Drieke", [5, 7, 2]);
+  var viertje = new Vierhoek("Viertje", 2, 3);
+  var blokske = new Vierkant("Blokje", 10);
 
 
   /*+++++++++++++++++ UITVOEREN ++++++++++++++++++++*/
-  eOutput.innerHTML	=	enumerateHTML(testFiguur) + enumerateHTML(testRondje);
+//  eOutput.innerHTML	=	enumerateHTML(testFiguur.schrijf);
 
+  vormpie.spreek();
+  vormpie.schrijf();
 
+  rondje.spreek();
+  rondje.schrijf();
+
+  hoeksken.spreek();
+  hoeksken.schrijf();
+
+  drieke.spreek();
+  drieke.schrijf();
+
+  viertje.spreek();
+  viertje.schrijf();
+
+  blokske.spreek();
+  blokske.schrijf();
 
   /*+++++++++++++++++ FUNCTIES ++++++++++++++++++++*/
-  function spreek() {
-    console.log('spreek');
-  }
-
-  function schrijf() {
-    console.log('schrijf');
-  }
-
-  function oppervlakteBerekenen() {
-    console.log('oppervlakteBerekenen');
-  }
-
-  function omtrekBerekenen() {
-    console.log('omtrekBerekenen');
-  }
-
 
   function enumerate(obj) {
     // Overloop alle eigenschappen van een object
