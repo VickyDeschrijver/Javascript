@@ -20,67 +20,75 @@
     <favorites_list name="projecten_advanced" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="JS_taak_Vormen.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../taken_advanced/JS_taak_Vormen.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-45.76923">
-              <caret line="267" column="31" selection-start-line="267" selection-start-column="31" selection-end-line="267" selection-end-column="31" />
-              <folding>
-                <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JS_taak_ArrayAugmentation.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../taken_advanced/JS_taak_ArrayAugmentation.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-29.807692">
-              <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="canvas.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/canvas.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8153998">
-              <caret line="73" column="21" selection-start-line="73" selection-start-column="21" selection-end-line="73" selection-end-column="21" />
-              <folding>
-                <element signature="e#970#1212#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="personeel_adv--.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/personeel_adv--.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="14.0">
-              <caret line="66" column="6" selection-start-line="43" selection-start-column="4" selection-end-line="66" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="personeel_adv--2.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/personeel_adv--2.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.423077">
-              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="81" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.47447917">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="mijnApp.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/mijnApp.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="-1.9615384">
+                  <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="cookiebank_applic2.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/cookiebank_applic2.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.35241857">
+                  <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+                  <folding>
+                    <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="cookiebank_app.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/cookiebank_app.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
+                  <folding>
+                    <element signature="n#!!doc" expanded="true" />
+                    <marker date="1430920707345" expanded="true" signature="55:6282" placeholder="{...}" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="cookiebank_app.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/cookiebank_app.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.3705486">
+                  <caret line="103" column="6" selection-start-line="103" selection-start-column="6" selection-end-line="103" selection-end-column="6" />
+                  <folding>
+                    <element signature="n#!!doc" expanded="true" />
+                    <element signature="e#158#2067#0" expanded="false" />
+                    <element signature="e#2463#2671#0" expanded="false" />
+                    <element signature="e#2867#3013#0" expanded="false" />
+                    <element signature="e#3066#3365#0" expanded="false" />
+                    <element signature="e#3418#3479#0" expanded="false" />
+                    <element signature="e#3544#4242#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Html5" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -97,6 +105,14 @@
         <option value="$PROJECT_DIR$/../taken_advanced/JS_taak_Vormen.html" />
         <option value="$PROJECT_DIR$/../taken_advanced/JS_taak_ArrayAugmentation.html" />
         <option value="$PROJECT_DIR$/canvas.html" />
+        <option value="$PROJECT_DIR$/../taken_advanced/aaa.html" />
+        <option value="$PROJECT_DIR$/../taken_advanced/JS_taak_grafiek.html" />
+        <option value="$USER_HOME$/Desktop/canvas-graph.htm" />
+        <option value="$PROJECT_DIR$/cookiebank_applic.html" />
+        <option value="$PROJECT_DIR$/../projecten_adv_nieuw/cookiebank_app/cookiebank_applic.html" />
+        <option value="$PROJECT_DIR$/mijnApp.html" />
+        <option value="$PROJECT_DIR$/cookiebank_applic2.html" />
+        <option value="$PROJECT_DIR$/cookiebank_app.js" />
       </list>
     </option>
   </component>
@@ -142,6 +158,7 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="FullScreen" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -240,11 +257,41 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/canvas.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1105#1347#0" expanded="false" />
+            <element signature="e#1371#1660#0" expanded="false" />
+            <element signature="e#1682#2536#0" expanded="false" />
+            <element signature="e#2559#3193#0" expanded="false" />
+            <element signature="e#3219#3344#0" expanded="false" />
+            <element signature="e#3838#4232#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/personeel_adv--.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="66" column="6" selection-start-line="43" selection-start-column="4" selection-end-line="66" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/personeel_adv--2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/personeel_adv.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="67" column="41" selection-start-line="67" selection-start-column="41" selection-end-line="67" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -270,7 +317,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="26" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -278,7 +324,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="93" column="88" selection-start-line="93" selection-start-column="88" selection-end-line="93" selection-end-column="88" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -286,7 +331,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="67" column="41" selection-start-line="67" selection-start-column="41" selection-end-line="67" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -312,7 +356,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="26" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -320,7 +363,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="93" column="88" selection-start-line="93" selection-start-column="88" selection-end-line="93" selection-end-column="88" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -328,7 +370,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="179" column="5" selection-start-line="161" selection-start-column="4" selection-end-line="179" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -344,7 +385,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="93" column="88" selection-start-line="93" selection-start-column="88" selection-end-line="93" selection-end-column="88" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -352,7 +392,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -367,7 +406,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="93" column="88" selection-start-line="93" selection-start-column="88" selection-end-line="93" selection-end-column="88" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -473,7 +511,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-60.153847">
           <caret line="92" column="4" selection-start-line="92" selection-start-column="4" selection-end-line="94" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -487,7 +524,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/personeel_adv--.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="14.0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="66" column="6" selection-start-line="43" selection-start-column="4" selection-end-line="66" selection-end-column="6" />
           <folding />
         </state>
@@ -495,7 +532,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/personeel_adv--2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.423077">
+        <state vertical-scroll-proportion="0.0">
           <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="81" />
           <folding />
         </state>
@@ -505,13 +542,75 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-71.26923">
           <caret line="109" column="35" selection-start-line="109" selection-start-column="35" selection-end-line="109" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../taken_advanced/aaa.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-32.423077">
+          <caret line="112" column="9" selection-start-line="35" selection-start-column="8" selection-end-line="112" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/canvas-graph.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="7.7272725">
+          <caret line="29" column="32" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../taken_advanced/JS_taak_grafiek.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39735773">
+          <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cookiebank_applic.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.653847">
+          <caret line="27" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../projecten_adv_nieuw/cookiebank_app/cookiebank_applic.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.83218163">
+          <caret line="164" column="0" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/canvas.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.016781837">
+          <caret line="213" column="48" selection-start-line="213" selection-start-column="48" selection-end-line="213" selection-end-column="48" />
+          <folding>
+            <element signature="e#1105#1347#0" expanded="false" />
+            <element signature="e#1371#1660#0" expanded="false" />
+            <element signature="e#1682#2536#0" expanded="false" />
+            <element signature="e#2559#3193#0" expanded="false" />
+            <element signature="e#3219#3344#0" expanded="false" />
+            <element signature="e#3838#4232#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../taken_advanced/JS_taak_ArrayAugmentation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../taken_advanced/JS_taak_Vormen.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-45.76923">
+        <state vertical-scroll-proportion="0.5972359">
           <caret line="267" column="31" selection-start-line="267" selection-start-column="31" selection-end-line="267" selection-end-column="31" />
           <folding>
             <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
@@ -519,20 +618,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../taken_advanced/JS_taak_ArrayAugmentation.html">
+    <entry file="file://$PROJECT_DIR$/mijnApp.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-29.807692">
-          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+        <state vertical-scroll-proportion="-1.9615384">
+          <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/canvas.html">
+    <entry file="file://$PROJECT_DIR$/../frameworks/bootstrap/css/bootstrap.min.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8153998">
-          <caret line="73" column="21" selection-start-line="73" selection-start-column="21" selection-end-line="73" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.28500986">
+          <caret line="4" column="3006" selection-start-line="4" selection-start-column="3006" selection-end-line="4" selection-end-column="3006" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../projecten_advanced_oud/cookiebank_applic.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.016781837">
+          <caret line="6" column="76" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cookiebank_applic2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35241857">
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
           <folding>
-            <element signature="e#970#1212#0" expanded="false" />
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cookiebank_app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3705486">
+          <caret line="103" column="6" selection-start-line="103" selection-start-column="6" selection-end-line="103" selection-end-column="6" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#158#2067#0" expanded="false" />
+            <element signature="e#2463#2671#0" expanded="false" />
+            <element signature="e#2867#3013#0" expanded="false" />
+            <element signature="e#3066#3365#0" expanded="false" />
+            <element signature="e#3418#3479#0" expanded="false" />
+            <element signature="e#3544#4242#0" expanded="false" />
           </folding>
         </state>
       </provider>

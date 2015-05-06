@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+<script>
+
+    // SINGLETON
+//    var mijnApp =   {
+//        naam:       "mijnApp",
+//        zegIets:    function() {
+//            console.log(this.naam);
+//        }
+//    }
+//
+//    mijnApp.zegIets();
+//    console.log(mijnApp.naam);
+//
+//    mijnApp.naam    =   "zijnApp";
+//    mijnApp.zegIets();
+
+    // MODEULE PATTERN
+    var mijnApp =   (function() {
+        var naam = "mijnApp"
+        return {
+            zegIets:    function () {
+                console.log(naam);
+            },
+            init:       function(nieuweNaam) {
+                naam    =   nieuweNaam;
+            }
+        };
+    }());
+
+    mijnApp.init("ChocolateFactory")
+    mijnApp.zegIets();
+    console.log(mijnApp.naam);
+
+    mijnApp.naam    =   "zijnApp";
+    mijnApp.zegIets();
+
+</script>
+
+
+</head>
+<body>
+
+</body>
+</html>

@@ -45,8 +45,15 @@ span.tag {
 <script type="text/javascript">
 	window.onload	=	function() {
 		var canvas	=	document.getElementById('canvas');
-		rechthoeken(canvas);
-		driehoek(canvas);
+//		rechthoeken(canvas);
+//		driehoek(canvas);
+//		cirkel(canvas);
+//		schrijf(canvas);
+		mijnCirkel(canvas);
+		bubbels(canvas);
+
+		mijnVierkant(canvas);
+		mijnVeelhoek(canvas);
 	}
 
 	function rechthoeken(c) {
@@ -62,17 +69,208 @@ span.tag {
 
 	function driehoek(c) {
 		var ctx	= c.getContext('2d');
+		ctx.lineWidth	=	15;
+		ctx.lineJoin	=	"bevel";
 		ctx.strokeStyle	=	"rgb(200,0,0)";
 		ctx.fillStyle	=	"white";
 
 		ctx.beginPath();
 		ctx.moveTo(400, 100);
 		ctx.lineTo(300, 250);
-		ctx.lineTo(300, 250);
+		ctx.lineTo(500, 250);
 		ctx.closePath();
 		ctx.fill();
 		ctx.stroke();
 
+	}
+
+	function cirkel(c) {
+		var ctx	= c.getContext('2d');
+		ctx.lineWidth	=	3;
+		ctx.strokeStyle	=	"black";
+		var straal		=	100;
+		var middelpunt_x	=	200;
+		var middelpunt_y	=	200;
+//		ctx.beginPath();
+//		ctx.arc(middelpunt_x, middelpunt_y, straal, 0, Math.PI*2, true);	// volledige cirkel
+//		ctx.stroke();
+
+		var waarden	=	[55,22,106];
+		var totaal	=	eval(waarden.join("+"));
+		var kleuren	=	["red", "blue", "green"];
+		var pi		=	Math.PI;
+		var starthoek	=	0;
+		var eindhoek	=	0;
+
+		for(var i=0; i<waarden.length; i++) {
+			booglengte	=	(waarden[i]/totaal) * pi * 2;
+			eindhoek	=	starthoek + booglengte;
+			ctx.beginPath();
+//			ctx.strokeStyle	=	kleuren[i];
+			ctx.fillStyle	=	kleuren[i];
+			ctx.arc(middelpunt_x, middelpunt_y, straal, starthoek, eindhoek, false);
+			ctx.lineTo(middelpunt_x, middelpunt_y);
+//			ctx.stroke();
+			ctx.fill();
+			starthoek = eindhoek;
+		}
+	}
+
+	function schrijf(c) {
+		var ctx		= c.getContext('2d');
+		var tekst	=	"vdab";
+
+		var x	=	450;
+		var y	=	100;
+
+		var R	=	60;
+		var G	=	100;
+		var B	=	180;
+
+		var rgb	=	function(r,g,b) {
+			return "rgb(" + r + "," + g + "," + b + ")";
+		}
+
+		if(ctx) {
+			ctx.font	=	"italic 120px Arial, sans serif";
+			ctx.strokeStyle	=	"black";
+			ctx.fillStyle	=	rgb(R,G,B);
+//			ctx.strokeText(tekst,x,y);
+//			ctx.fillText(tekst,x,y);
+			for(var i=0; i<100; i++) {
+				f	=	i*3;
+				R	=	(R>255) ? 0:R+f;
+				G	=	(G>255) ? 0:G+f;
+				B	=	(B>255) ? 0:B+f;
+
+				ctx.fillStyle	=	rgb(R,G,B);
+				ctx.fillText(tekst, x+f, y+f);
+				ctx.strokeText(tekst, x+f, y+f);
+			}
+		}
+	}
+
+	function mijnCirkel(c) {
+		var middelpunt	=	new Punt(400,400);
+		var bol			=	new Cirkel(middelpunt, 40, "purple", "cyan", false);
+		bol.teken(c);
+	}
+
+	function bubbels(c) {
+		var straal	=	16;
+		var R		=	255;
+		var G		=	255;
+		var B		=	0;
+
+		for(var i=0; i<11; i++) {
+			for(var j=0; j<11; j++) {
+				R	=	(R<0) ? 255: 25*i;
+				G	=	(G<0) ? 255: 25*j;
+				kleur	=	'rgb(' + R + ',' + G + ',' + B + ')';
+
+				middelpunt_x	=	20+j*30;
+				middelpunt_y	=	20+i*30;
+
+				var middelpunt	=	new Punt(middelpunt_x, middelpunt_y);
+				var bol			=	new Cirkel(middelpunt, straal, kleur, kleur, true);
+				bol.teken(c);
+			}
+		}
+	}
+
+	function mijnVeelhoek(c) {
+		/* instantie van een veelhoek */
+		var p1	=	new Punt(200,50);
+		var p2	=	new Punt(330,200);
+		var p3	=	new Punt(500,111);
+		var p4	=	new Punt(300,290);
+		var p5	=	new Punt(390,340);
+		var p6	=	new Punt(490,590);
+		var p7	=	new Punt(250,390);
+		var p8	=	new Punt(20,400);
+		var p9	=	new Punt(200,260);
+
+		var v	=	new Veelhoek([p1,p2,p3,p5,p6,p7,p8,p9], "red", "white");
+		v.teken(c,true);
+	}
+
+	function mijnVierkant(c) {
+		/* instantie van een veelhoek */
+		var zijde	=	400;
+		var startpunt_xy	=	100;
+		var p1	=	new Punt(startpunt_xy, startpunt_xy);
+		var p2	=	new Punt(startpunt_xy, startpunt_xy + zijde);
+		var p3	=	new Punt(startpunt_xy + zijde, startpunt_xy + zijde);
+		var p4	=	new Punt(startpunt_xy + zijde, startpunt_xy);
+
+		var v	=	new Veelhoek([p1,p2,p3,p4], "blue", "cyan");
+		console.log(v);
+		v.teken(c,true);
+	}
+
+
+	/**** CONSTRUCTORS ****/
+	function Punt(x,y) {
+		// Constructor function voor Punt object
+		this.x	=	x;
+		this.y	=	y;
+	}
+
+	function Cirkel(middelpunt, straal, randKleur, vulKleur, vullen) {
+		/*
+		@middelpunt				Puntobject
+		@straal					number, px lengte
+		@randKleur, vulKleur	string, geldige kleur
+		@vullen					boolean, opvullen of enkel rand tekenen
+		 */
+		this.middelpunt		=	middelpunt;
+		this.straal			=	straal;
+		this.randKleur		=	randKleur;
+		this.vulKleur		=	vulKleur;
+		this.vullen			=	vullen || false;
+	}
+	Cirkel.prototype.teken	=	function(c) {
+		if(c) {
+			var ctx		= c.getContext('2d');
+			ctx.strokeStyle	=	this.randKleur;
+			ctx.fillStyle	=	this.vulKleur;
+			ctx.beginPath();
+			ctx.arc(this.middelpunt.x, this.middelpunt.y, this.straal, 0, Math.PI*2, true);
+			if(this.vullen === true) {
+				ctx.fill();
+			}
+			else {
+				ctx.stroke();
+			}
+		}
+	}
+
+	function Veelhoek(arrPunten, lijnKleur, vulKleur) {
+		/* Constructor voor veelhoek
+		@arrPunten				array van Punt objecten
+		@lijnKleur, vulKleur	geldige CSS kleur
+		 */
+		this.punten		=	arrPunten || [];
+		this.lijnKleur	=	lijnKleur;
+		this.vulKleur	=	vulKleur;
+	}
+	Veelhoek.prototype.teken	=	function(c, vullen) {
+		var vullen	=	vullen || false;
+
+		if(c) {
+			var ctx	= c.getContext('2d');
+			ctx.lineWidth	=	10;
+			ctx.strokeStyle	=	this.lijnKleur;
+			ctx.fillStyle	=	this.vulKleur;
+			ctx.beginPath();
+			ctx.moveTo(this.punten[0].x, this.punten[0].y);
+			for(var i=1; i<this.punten.length; i++) {
+				ctx.lineTo(this.punten[i].x, this.punten[i].y);
+			}
+			ctx.closePath();
+			if(vullen === true) {ctx.fill()};
+			ctx.stroke();
+		}
 	}
 
 </script>

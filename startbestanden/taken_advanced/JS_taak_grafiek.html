@@ -33,6 +33,129 @@ var weergegevens2009 = [
 	["dec",2.9,80.8]
 ]
 
+// globaal
+var canvasWidth;
+var canvasHeight;
+
+var bars =[];
+var lines = [];
+
+window.onload = function() {
+	var canvas = document.getElementById('canvas');
+
+
+	/***** OBJECTEN ****/
+	function grafiek() {}
+	function Balk() {}
+	function Lijn() {}
+
+
+	/**** CONSTRUCTORS ****/
+	function Punt(x,y) {
+		// Constructor function voor Punt object
+		this.x	=	x;
+		this.y	=	y;
+	}
+
+	function Vorm(arrPunten, lijnKleur, vulKleur) {
+		this.punten		=	arrPunten;
+		this.lijnKleur	=	lijnKleur;
+		this.vulKleur	=	vulKleur;
+	}
+	Vorm.prototype.teken	=	function(c) {
+		if(c) {
+			var ctx	= c.getContext('2d');
+			ctx.lineWidth	=	2;
+			ctx.strokeStyle	=	this.lijnKleur;
+			ctx.fillStyle	=	this.vulKleur;
+			ctx.beginPath();
+			ctx.moveTo(this.punten[0].x, this.punten[0].y);
+			for(var i=1; i<this.punten.length; i++) {
+				ctx.lineTo(this.punten[i].x, this.punten[i].y);
+			}
+			ctx.closePath();
+			if(vullen === true) {ctx.fill()};
+			ctx.stroke();
+		}
+	}
+
+
+
+
+
+
+
+
+
+	canvasWidth = canvas.width;
+	canvasHeight = canvas.height;
+
+	for(var i = 1; i < weergegevens2009.length; i++){
+		bars[i-1] = new Bar(i-1, weergegevens2009[i][2]);
+	}
+	for(var j = 2; j < weergegevens2009.length; j++){
+		var xPosition = ((canvasWidth*0.2)/weergegevens2009.length);
+
+		var x1 		= ((j-1) * xPosition) 	- xPosition/2;
+		var x2 		= ((j) 	* xPosition) 	- xPosition/2;
+
+		var y1 		= canvasHeight - (weergegevens2009[j-1][1]);
+		var y2 		= canvasHeight - (weergegevens2009[j][1]);
+
+		lines[j-2] 	= new Line(x1,y1,x2,y2);
+	}
+
+	draw(canvas);
+}
+
+function draw(c){
+	//grijze achtergrond
+	var ctx = c.getContext('2d');
+	ctx.strokeStyle = "black";
+	ctx.fillStyle = "rgb(200,200,200)";
+	ctx.fillRect(0,0,canvasWidth, canvasHeight);
+	//teken alle balken
+	for(var i = 0; i < bars.length; i++){
+		bars[i].draw(c);
+	}
+	//teken alle lijnen
+	for(var j = 0; j < lines.length; j++){
+		lines[j].draw(c);
+	}
+}
+
+function Bar(index, value){
+	this.index = index;
+	this.value = value;
+	this.width = canvasWidth/weergegevens2009.length;
+}
+Bar.prototype.draw = function(c){
+	var ctx = c.getContext('2d');
+	ctx.strokeStyle = "black";
+	ctx.fillStyle = "rgb(100,150,200)";
+
+	var x = this.index * this.width;
+	var y = canvasHeight - this.value;
+	var height	= this.value;
+
+	ctx.fillRect(x,y,this.width,height);
+	ctx.strokeRect(x, y, this.width, height);
+}
+function Line(x1, y1, x2, y2){
+	this.x1 = x1;
+	this.x2 = x2;
+	this.y1 = y1;
+	this.y2 = y2;
+}
+Line.prototype.draw = function(c){
+	var ctx = c.getContext('2d');
+	ctx.strokeStyle = "red";
+
+	ctx.beginPath()
+	ctx.moveTo(this.x1,this.y1);
+	ctx.lineTo(this.x2,this.y2);
+	ctx.stroke();
+}
 </script>
 </head>
 <body>
@@ -51,5 +174,10 @@ var weergegevens2009 = [
   <li>teken  op het canvas de neerslaghoeveelheden als blauw opgevulde balkjes en de temperaturen als  een rode lijn van  met elkaar verbonden punten</li>
   <li>doe dit met <b>constructors</b> om &quot;balk&quot; en &quot;lijn&quot; objecten te instanti&euml;ren. Probeer deze constructors zelf af te leiden van een <b>superClass</b> <i>Vorm</i> die een method <i>teken(</i>) die voor de echte weergave op het canvas zorgt. Deze method kan door de  subClasses (eventueel)  overschreven worden (override) </li>
 </ul>
+
+<canvas id="canvas" width="800px" height="600px"><p>deze pagina bevat een <code>canvas</code> tag (HTML5)<br />
+	uw browser kan deze tag niet weergeven.</p></canvas>
+
+
 </body>
 </html>
