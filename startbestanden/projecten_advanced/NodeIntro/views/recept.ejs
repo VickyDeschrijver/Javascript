@@ -1,0 +1,15 @@
+<% layout('layout') -%>
+
+<h1> <%= title %></h1>
+<h2> <%= name %></h2>
+<h3> Ingredienten </h3>
+<ul>
+    <% ingredients.forEach(function(ingredient) {%>
+    <li> <%= ingredient %> </li>
+    <% })%>
+</ul>
+<h3> Werkwijze </h3>
+<p> <%= directions %></p>
+
+<% block('header', "<nav><ul><li><a href='/'> home </a> </li> <li> <a href='/recepten'> recepten </a> </li> </ul> </nav> ") -%>
+<% block('footer', "<p>&copy; Sofie </p>") -%>

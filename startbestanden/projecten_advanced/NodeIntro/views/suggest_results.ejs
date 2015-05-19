@@ -1,0 +1,18 @@
+<% layout('layout') -%>
+
+<h1> <%= title %></h1>
+<h3> Bedankt voor je inzending! </h3>
+
+<p> Indien je recept gekozen wordt, kan je een mooie prijs in de wacht slepen. </p>
+<p> Dit zijn de gegevens die je doorstuurde: </p>
+
+<h3> Naam van het recept: <%= name %></h3>
+
+<h3> Ingredienten </h3>
+<pre> <%= ingredients %></pre>
+
+<h3> Werkwijze </h3>
+<pre> <%= directions %></pre>
+
+<% block('header', "<nav><ul><li><a href='/'> home </a> </li> <li> <a href='/recepten'> recepten </a> </li> </ul> </nav> ") -%>
+<% block('footer', "<p>&copy; Sofie </p>") -%>
