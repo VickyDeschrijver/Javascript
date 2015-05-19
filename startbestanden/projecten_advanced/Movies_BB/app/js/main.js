@@ -21,5 +21,6 @@ requirejs.config({
 
 // Require laadt de app
 require(['movies'], function(movies) {
-    //movies.start()          // start de movies app
+    console.log('movies kan gestart worden');
+    movies.start()          // start de movies app
 });

@@ -15,7 +15,7 @@
 
     <div id="films">   <!-- film container -->
 
-        <form id="frmFilm" style="display:none">
+        <form id="frmFilm">
             <div><label>titel</label><input type="text" id="titel" name="titel"/></div>
             <div><label>filmNr</label><input type="text" id="filmNr" name="filmNr"/></div>
             <div><label>beschrijving</label><textarea id="beschrijving" name="beschrijving"></textarea></div>
@@ -50,8 +50,8 @@
             <dd><%= duur %></dd>
             <dt>release:</dt>
             <dd><%= release %></dd>
-
         </dl>
+        <button class="delete"> verwijder </button>
     </div>
 </script>
 </body>
