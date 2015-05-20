@@ -24,6 +24,10 @@ app.configure(function() {
 mongoose.connect('mongodb://localhost/filmotheek');
 
 // Film schema
+var Cast    =   new mongoose.Schema({
+    acteur:     String
+})
+
 var Film    =   new mongoose.Schema({
     filmNr:     Number,
     titel:      String,
@@ -32,8 +36,11 @@ var Film    =   new mongoose.Schema({
     duur:       String,
     regisseur:  String,
     release:    Date,
-    foto:       String
+    foto:       String,
+    cast:       [Cast]
 })
+
+
 
 //MongoDB Model
 var FilmModel   =   mongoose.model('Film', Film);
@@ -66,7 +73,7 @@ app.get('/api/films/:id', function(request, response) {
 })
 
 // POST /api/films: film toevoegen
-app.post('/api/films', function(reqyest, response) {
+app.post('/api/films', function(request, response) {
     var film    =   new FilmModel({
         filmId:     request.body.filmId,
         titel:      request.body.titel,
@@ -75,7 +82,8 @@ app.post('/api/films', function(reqyest, response) {
         duur:       request.body.duur,
         regisseur:  request.body.regisseur,
         release:    request.body.release,
-        foto:      request.body.foto
+        foto:       request.body.foto,
+        cast:       request.body.cast
     });
 
     film.save(function(err) {
@@ -87,6 +95,47 @@ app.post('/api/films', function(reqyest, response) {
     })
     return response.send(film);
 });
+
+// UPDATE /api/films/id: update een film
+app.post('/api/films/:id', function(request, response) {
+    console.log('updating film ' + request.body.titel);
+    return FilmModel.findById(request.params.id, function (err, film) {
+            film.filmId     = request.body.filmId,
+            film.titel      = request.body.titel,
+            film.beschrijving = request.body.beschrijving,
+            film.genre      = request.body.genre,
+            film.duur       = request.body.duur,
+            film.regisseur  = request.body.regisseur,
+            film.release    = request.body.release,
+            film.foto       = request.body.foto,
+            film.cast       = request.body.cast
+
+        return film.save(function (err) {
+            if (!err) {
+                console.log('film geupdated');
+                return response.send(film);
+            } else {
+                return console.log(err);
+            }
+        });
+    })
+})
+
+// VERWIJDER /api/films/id verwijder via id
+app.delete('/api/films/:id', function(request, response) {
+    console.log('verwijderen film met id ' + request.params.id);
+    return FilmModel.findById(request.params.id, function(err, film) {
+        return film.remove(function(err) {
+            if(!err) {
+                console.log('film gewist');
+                return response.send('');
+            } else {
+                return console.log(err);
+            }
+        })
+    })
+})
+
 
 // start server
 var port    =   4711;
