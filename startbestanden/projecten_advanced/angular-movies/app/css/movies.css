@@ -1,0 +1,77 @@
+/* 
+    Document   : style
+    Created on : 6-nov-2013, 13:51:37
+    Author     : jan
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.container {
+    width:50%;
+    margin:0 auto; 
+}
+/*eenvoudig menuutje overgenomen van Angular Seed */
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+
+/* class voor Film model */
+.film{
+	width: 100%;
+        clear:both;
+	padding:1em 0;
+	border-bottom:2px solid silver;
+	}
+
+.film img {float:left; margin-right:2em;}
+.film .kol {margin-left:12em;}
+.film h2 {margin-top:0;}
+
+.film dl{overflow:auto;width: 100%; list-style:none}
+.film dt{display:inline; width: 30%; clear:left; float:left; font-weight:bold}
+.film dd{display:inline; width: 65%; clear:right; float:right; margin:0}
+.delete {float:right;}
+
+/*repeater test */
+.deeen {background: darkgray;}
+.deander {background: lightgray;}
+
+
+
+
+/*clearfix hack*/
+.clearFix:before, .clearFix:after {
+	content: " ";
+	display: table;
+}
+.clearFix:after {
+	clear: both;
+}
+/* enkel voor IE6/7  */ 
+.clearFix {
+ *zoom: 1;
+}

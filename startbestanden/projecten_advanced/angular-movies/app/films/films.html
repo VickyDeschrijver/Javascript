@@ -1,0 +1,44 @@
+<!-- partial films.html -->
+
+<h2> {{subtitel}} </h2>
+<p> Zoek: <input type="tekst" ng-model="zoekTekst"> </p>
+<p> Zoek regisseur: <input type="text" ng-model="zoek.regisseur"> </p>
+<!--<p> Genre: <select ng-model="genreType">
+    <option selected="selected" value=""> Alle </option>
+    <option value="Science Fiction"> Science Fiction </option>
+    <option value="Comedy"> Comedy </option>
+    <option value="Crime"> Crime </option>
+    <option value="Adventure"> Adventure </option>
+    <option value="Western"> Western </option>
+    <option value="Kinderen"> Kinderen </option>
+</select></p>-->
+<p> Genre:
+    <select ng-model="genreType">
+        <option selected="selected" value=""> Alle </option>
+        <option ng-repeat="movie in movies | unique:'genre'" value="{{movie.genre}}"> {{movie.genre}} </option>
+    </select>
+</p>
+
+<div class="film clearfix" ng-repeat="movie in movies | filter:zoekTekst | filter:zoek:true | filter:genreType" ng-class="$even ? 'deeen':'deander'">
+
+    <img ng-src="img/{{movie.foto}}" alt="{{movie.titel}}" />
+
+    <div class="kol" >
+        <h2> [{{$index}}] <a ng-href="#/films/{{movie._id}}"> {{ movie.titel }} </a> <small>-- {{movie.filmNr}} --</small></h2>
+        <p> {{movie.beschrijving}}</p>
+        <dl>
+            <dt> Regisseur:</dt>
+            <dd> {{movie.regisseur}} </dd>
+            <dt> genre:</dt>
+            <dd> {{movie.genre}} </dd>
+            <dt> duurtijd:</dt>
+            <dd> {{movie.duur}} </dd>
+            <dt> release:</dt>
+            <dd> {{movie.release}} </dd>
+            <dt> Cast:</dt>
+            <!--<dd> {{movie.cast}} </dd>-->
+        </dl>
+        <a ng-href="#/films/edit/{{movie._id}}"> edit </a>
+        <button class="delete"> verwijder </button>
+    </div>
+</div>

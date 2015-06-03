@@ -1,0 +1,18 @@
+<!-- partial filmform.html -->
+
+<div>
+    <h2> {{subtitel}} </h2>
+    <form id="frmFilm" ng-model="movie" ng-submit="save(movie)">
+        <div><label> _id </label><input type="text" ng-model="movie._id" readonly/></div>
+        <div><label> titel </label><input type="text" ng-model="movie.titel"/></div>
+        <div><label> filmNr </label><input type="text" ng-model="movie.filmNr"/></div>
+        <div><label> beschrijving </label><textarea type="text" ng-model="movie.beschrijving"></textarea></div>
+        <div><label> regisseur </label><input type="text" ng-model="movie.regisseur"/></div>
+        <div><label> genre </label><input type="text" ng-model="movie.genre"/></div>
+        <div><label> duurtijd </label><input type="text" ng-model="movie.duur"/></div>
+        <div><label> release datum</label><input type="text" ng-model="movie.release" placeholder="yyyy-MM-dd"/></div>
+        <div><label> Cast (vb. Robert De Niro, Jack Nicholson) </label><input type="text" title="gebruik een komma als afscheider" ng-model="movie.cast"/></div>
+        <div><label> cover image </label><input type="text" ng-model="movie.foto"/></div>
+        <div><label></label><input type="submit" value="bijwerken"/></div>
+    </form>
+</div>

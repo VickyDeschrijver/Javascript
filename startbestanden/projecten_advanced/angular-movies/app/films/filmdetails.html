@@ -1,0 +1,27 @@
+<!-- partial filmdetails.html -->
+
+<h2> {{subtitel}} </h2>
+
+<div class="film" ng-model="movie">
+
+    <img ng-src="img/{{movie.foto}}" alt="{{movie.titel}}" />
+
+    <div class="kol" >
+        <h2> [{{$index}}] {{ movie.titel }} <small>-- {{movie.filmNr}} --</small></h2>
+        <p> {{movie.beschrijving}}</p>
+        <dl>
+            <dt> Regisseur:</dt>
+            <dd> {{movie.regisseur}} </dd>
+            <dt> genre:</dt>
+            <dd> {{movie.genre}} </dd>
+            <dt> duurtijd:</dt>
+            <dd> {{movie.duur}} </dd>
+            <dt> release:</dt>
+            <dd> {{movie.release}} </dd>
+            <dt> Cast:</dt>
+            <!--<dd> {{movie.cast}} </dd>-->
+        </dl>
+        <a ng-href="#/films/edit/{{movie._id}}"> edit </a>
+    </div>
+    <p> <a ng-href="#/films/"> terug naar filmlijst </a> </p>
+</div>
