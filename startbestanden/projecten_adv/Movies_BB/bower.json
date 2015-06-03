@@ -1,0 +1,14 @@
+{
+    "name": "BB_Movies",
+    "private": true,
+    "dependencies": {
+        "bootstrap": "*",
+        "modernizr": "*",
+        "jquery": "~2.0.0",
+        "backbone": "*",
+        "underscore": "*",
+        "requirejs": "*",
+        "requirejs-domready": "*"
+    },
+    "devDependencies": {}
+}

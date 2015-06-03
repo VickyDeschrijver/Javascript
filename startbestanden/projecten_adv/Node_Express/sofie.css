@@ -1,0 +1,20 @@
+/*
+CSS stylesheet
+Created by jan on 7/07/2014.
+*/
+/*reset*/
+html, body, div, section, header, footer {
+    margin:0;
+    padding:0;
+}
+.wrapper{
+    margin: 0 auto;
+    width: 80%;
+    max-width:1200px;
+}
+body {font-family: Verdana, Geneva, sans-serif; }
+nav ul {list-style: none;padding:0;}
+nav ul li {display: inline-block;}
+nav ul li a{display: inline-block;padding: 0 1em;}
+nav ul li a:first-child{padding-left: 0;}
+form {max-width:1000px;}
