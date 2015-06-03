@@ -1,0 +1,17 @@
+<!-- partial instructeurslijst -->
+
+<div>
+    <h2> Instructeurs </h2>
+    <input type="text" ng-model="zoeken.naam">
+    <ul>
+        <li ng-repeat="instructeur in getInstructeurs | filter:zoeken:strict | orderBy:'stad' ">
+            {{instructeur.naam}} : {{instructeur.stad | uppercase}}
+        </li>
+    </ul>
+
+    <p> Toevoegen: </p>
+    <p> <label> naam: </label> <input type="text" ng-model="nieuw.naam"></p>
+    <p> <label> stad: </label> <input type="text" ng-model="nieuw.stad"></p>
+    <p> <button ng-click="addInstructeur()"> Voeg instructeur toe </button></p>
+
+</div>

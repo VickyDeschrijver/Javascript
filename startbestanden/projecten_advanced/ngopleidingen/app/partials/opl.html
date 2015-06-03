@@ -1,0 +1,17 @@
+<!-- partial opleidingenlijst -->
+
+<div>
+    <h2> Opleidingen </h2>
+    <select ng-model="selectedItem" ng-options="opl.naam for opl in getOpleidingen | orderBy : '-naam'" ng-change="toonDetailOpl()">
+        <option value=""> - kies een opleiding - </option>
+       <!-- <option ng-repeat="opl in opleidingen" value="{{opl.code}}"> {{opl.naam }}</option>-->
+    </select>
+    <p>{{selectedItem}}</p>
+
+    <p> Toevoegen: </p>
+    <p> <label> naam: </label> <input type="text" ng-model="nieuw.naam"></p>
+    <p> <label> code: </label> <input type="text" ng-model="nieuw.code"></p>
+    <p> <label> categorie: </label> <input type="text" ng-model="nieuw.categorie"></p>
+    <p> <button ng-click="addOpleiding()"> Voeg opleiding toe </button></p>
+
+</div>
